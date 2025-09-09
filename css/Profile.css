@@ -488,3 +488,141 @@ body {
         padding: 20px;
     }
 }
+    </style>
+</head>
+<body>
+    <header class="profile-header">
+        <div class="container">
+            <div class="profile-avatar">
+                <img id="profileImage" alt="Profile">
+            </div>
+            <h1 class="profile-name" id="profileName"></h1>
+            <p class="profile-tagline" id="profileTagline">Pemilik WALZSHOP Marketplace</p>
+        </div>
+    </header>
+
+    <main class="profile-content container">
+        <section class="about-section">
+            <h2 class="section-title">Tentang Saya</h2>
+            <p class="about-text" id="aboutText"></p>
+        </section>
+
+        <section class="contact-section">
+            <h2 class="section-title">Kontak Saya</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Alamat</h4>
+                        <p id="contactAddress"></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Telepon/WhatsApp</h4>
+                        <p id="contactPhone"></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p id="contactEmail"></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Jam Operasional</h4>
+                        <p>09:00 - 21:00 WIB</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section">
+            <h3 class="social-title">Ikuti Saya di Media Sosial</h3>
+            <div class="social-icons">
+                <a id="ytLink" class="social-icon" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a id="tiktokLink" class="social-icon" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a id="waLink" class="social-icon" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a id="telegramLink" class="social-icon" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </section>
+
+        <section class="message-section">
+            <h2 class="section-title">Kirim Pesan</h2>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <input type="text" id="name" class="form-input" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="Masukkan alamat email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Pesan</label>
+                    <textarea id="message" class="form-textarea" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Kirim Pesan</span>
+                    <span class="btn-loading"><i class="fas fa-spinner"></i></span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <div class="notification" id="successNotification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="notification-content">
+            Pesan berhasil dikirim!
+        </div>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="search.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>Cari</span>
+        </a>
+        <a href="keranjang.html" class="nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Keranjang</span>
+        </a>
+        <a href="profil.html" class="nav-item active">
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
+        </a>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/profil.js"></script>
+</body>
+</html>
