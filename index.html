@@ -22,10 +22,10 @@
 
     <div id="qris-popup" class="popup">
         <div class="popup-content">
-            <img src="qris.png" alt="QRIS Code">
+            <img src="qris.png" alt="QRIS Code" id="qris-image">
             <div class="popup-buttons">
                 <button class="close-button" onclick="closePopup('qris-popup')">Keluar</button>
-                <button class="enlarge-button">Perbesar</button>
+                <button class="enlarge-button" id="enlarge-qris">Perbesar</button>
             </div>
         </div>
     </div>
@@ -33,10 +33,21 @@
     <div id="dana-popup" class="popup">
         <div class="popup-content">
             <p id="dana-number">083139243389</p>
-            <button class="copy-button">Copy</button>
+            <button class="copy-button" id="copy-dana">Copy</button>
             <p>ATAS NAMA : TI** SUT***</p>
             <button class="close-button" onclick="closePopup('dana-popup')">Keluar</button>
         </div>
+    </div>
+
+    <div id="image-enlarge-popup" class="popup">
+        <div class="popup-content enlarge-content">
+            <img src="" alt="Enlarged Image" id="enlarged-img">
+            <button class="close-button" onclick="closePopup('image-enlarge-popup')">Tutup</button>
+        </div>
+    </div>
+
+    <div id="copy-notification" class="copy-notification">
+        Nomor Berhasil Disalin\!
     </div>
 
     <script src="script.js"></script>
