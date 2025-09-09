@@ -4,12 +4,12 @@ body, html {
     height: 100%;
     font-family: 'Poppins', sans-serif;
     color: #fff;
-    overflow: hidden;
+    overflow: hidden; 
     position: relative;
 }
 
 .background-image {
-    background-image: url('f21gcj.jpg');
+    background-image: url('f21gcj.jpg'); /* Gambar background yang Anda berikan */
     background-size: cover;
     background-position: center;
     position: fixed;
@@ -18,8 +18,8 @@ body, html {
     width: 100%;
     height: 100%;
     z-index: -2;
-    filter: blur(5px);
-    transform: scale(1.05);
+    filter: blur(5px); /* Efek blur pada background */
+    transform: scale(1.05); /* Sedikit zoom untuk menghindari tepi buram */
 }
 
 .overlay {
@@ -28,7 +28,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.6); /* Overlay gelap */
     z-index: -1;
 }
 
@@ -45,13 +45,13 @@ body, html {
 }
 
 .content-box {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1); /* Background transparan */
+    backdrop-filter: blur(10px); /* Efek glassmorphism */
+    -webkit-backdrop-filter: blur(10px); /* Untuk kompatibilitas browser */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border tipis */
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Efek bayangan */
     max-width: 400px;
     width: 100%;
 }
@@ -60,7 +60,7 @@ h1 {
     font-size: 2.2em;
     margin-bottom: 30px;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Bayangan teks agar lebih mudah dibaca */
 }
 
 .payment-option {
@@ -75,12 +75,12 @@ h1 {
     color: white;
     font-size: 1.1em;
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transisi halus saat hover */
 }
 
 .payment-option:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* Efek naik sedikit saat hover */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -92,7 +92,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8); /* Overlay gelap saat popup muncul */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -138,11 +138,11 @@ h1 {
 }
 
 .copy-button {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Hijau */
     color: white;
 }
 
 .popup-content .close-button {
-    background-color: #f44336;
+    background-color: #f44336; /* Merah */
     color: white;
 }
