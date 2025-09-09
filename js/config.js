@@ -5,7 +5,7 @@ banner: "https://files.catbox.moe/ksyny1.jpg", // Url Banner
 tentang: "WALZSHOP adalah toko online terpercaya yang telah melayani ribuan pelanggan sejak 2020. Kami menyediakan berbagai produk digital untuk kebutuhan sehari-hari dengan kualitas terbaik dan harga terjangkau.\n\nKomitmen kami adalah memberikan pengalaman berbelanja yang menyenangkan dengan pelayanan terbaik, produk original, dan garansi resmi untuk semua produk yang kami jual.",
 alamat: "Jl. Contoh No. 123, Jakarta, Indonesia",
 sosial_media: {
-  email: "walzlonely@gmail.com // Email
+  email: "walzlonely@gmail.com", // Email
   youtube: "walzlonely3", // YouTube Username 
   tiktok: "walzlonely🤙", // Tiktok Username 
   whatsapp: "6282298902274", // WhatsApp Number 
