@@ -4,12 +4,13 @@ body, html {
     height: 100%;
     font-family: 'Poppins', sans-serif;
     color: #fff;
-    overflow: hidden; 
+    overflow: hidden;
     position: relative;
+    background-color: #1a1a2e; 
 }
 
 .background-image {
-    background-image: url('f21gcj.jpg'); /* Gambar background yang Anda berikan */
+    background-image: url('f21gcj.jpg');
     background-size: cover;
     background-position: center;
     position: fixed;
@@ -18,8 +19,9 @@ body, html {
     width: 100%;
     height: 100%;
     z-index: -2;
-    filter: blur(5px); /* Efek blur pada background */
-    transform: scale(1.05); /* Sedikit zoom untuk menghindari tepi buram */
+    filter: blur(8px); /* Blur yang sedikit lebih kuat */
+    transform: scale(1.08); /* Sedikit zoom untuk menghindari tepi buram */
+    transition: filter 0.5s ease;
 }
 
 .overlay {
@@ -28,7 +30,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Overlay gelap */
+    background-color: rgba(0, 0, 0, 0.7); /* Overlay lebih gelap */
     z-index: -1;
 }
 
@@ -45,43 +47,47 @@ body, html {
 }
 
 .content-box {
-    background: rgba(255, 255, 255, 0.1); /* Background transparan */
-    backdrop-filter: blur(10px); /* Efek glassmorphism */
-    -webkit-backdrop-filter: blur(10px); /* Untuk kompatibilitas browser */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Border tipis */
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.15); /* Transparansi sedikit lebih tinggi */
+    backdrop-filter: blur(15px); /* Efek glassmorphism lebih kuat */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Border lebih jelas */
+    border-radius: 25px; /* Sudut lebih membulat */
     padding: 40px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Efek bayangan */
-    max-width: 400px;
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5); /* Bayangan lebih dalam */
+    max-width: 450px; /* Ukuran box sedikit lebih besar */
     width: 100%;
+    animation: fadeIn 1s ease-out; /* Animasi fade-in saat load */
 }
 
 h1 {
-    font-size: 2.2em;
-    margin-bottom: 30px;
+    font-size: 2.5em; /* Ukuran judul lebih besar */
+    margin-bottom: 35px;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Bayangan teks agar lebih mudah dibaca */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Bayangan teks lebih kuat */
+    letter-spacing: 1.5px; /* Spasi huruf */
 }
 
 .payment-option {
     display: block;
     width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
+    padding: 18px; /* Padding lebih besar */
+    margin: 12px 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.6); /* Border lebih terlihat */
+    border-radius: 15px; /* Sudut lebih membulat */
     text-decoration: none;
     color: white;
-    font-size: 1.1em;
+    font-size: 1.2em; /* Ukuran teks lebih besar */
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transisi halus saat hover */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    text-transform: uppercase; /* Huruf kapital */
+    letter-spacing: 1px;
 }
 
 .payment-option:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px); /* Efek naik sedikit saat hover */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-5px) scale(1.02); /* Efek hover lebih menonjol */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Popup Styles */
@@ -92,57 +98,175 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Overlay gelap saat popup muncul */
+    background-color: rgba(0, 0, 0, 0.85); /* Overlay popup lebih gelap */
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.popup.active {
+    opacity: 1;
 }
 
 .popup-content {
     background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(25px); /* Blur popup lebih kuat */
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     border-radius: 20px;
     padding: 30px;
     text-align: center;
     color: #fff;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.popup.active .popup-content {
+    transform: scale(1);
+    opacity: 1;
 }
 
 .popup-content img {
-    max-width: 250px;
+    max-width: 280px; /* Ukuran gambar QRIS sedikit lebih besar di popup normal */
     height: auto;
-    margin-bottom: 20px;
-    border-radius: 10px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .popup-content p {
-    font-size: 1.2em;
+    font-size: 1.3em;
     font-weight: 600;
-    margin: 10px 0;
+    margin: 15px 0;
+    letter-spacing: 0.5px;
+}
+
+.popup-buttons {
+    margin-top: 20px;
 }
 
 .popup-content button {
-    padding: 10px 20px;
-    margin: 8px;
+    padding: 12px 25px; /* Padding tombol lebih besar */
+    margin: 10px;
     border: none;
-    border-radius: 50px;
+    border-radius: 30px; /* Bentuk tombol lebih oval */
     cursor: pointer;
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .popup-content button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .copy-button {
-    background-color: #4CAF50; /* Hijau */
+    background-color: #28a745; /* Hijau cerah */
     color: white;
 }
 
-.popup-content .close-button {
-    background-color: #f44336; /* Merah */
+.copy-button:hover {
+    background-color: #218838;
+}
+
+.close-button {
+    background-color: #dc3545; /* Merah cerah */
     color: white;
+}
+
+.close-button:hover {
+    background-color: #c82333;
+}
+
+.enlarge-button {
+    background-color: #007bff; /* Biru cerah */
+    color: white;
+}
+
+.enlarge-button:hover {
+    background-color: #0056b3;
+}
+
+/* Style untuk popup gambar yang diperbesar */
+.enlarge-content {
+    padding: 20px;
+    background: none; /* Hilangkan background glassmorphism untuk gambar */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    width: auto;
+    max-width: 90vw; /* Lebar maksimum 90% dari viewport */
+    max-height: 90vh; /* Tinggi maksimum 90% dari viewport */
+}
+
+.enlarge-content img {
+    max-width: 100%;
+    max-height: 80vh; /* Tinggi maksimum gambar di popup */
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Memastikan gambar pas tanpa terpotong */
+    border-radius: 10px;
+}
+
+/* Custom Copy Notification */
+.copy-notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px); /* Awalnya di luar layar bawah */
+    background-color: #28a745;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out, visibility 0.4s ease-out;
+    z-index: 1001;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.copy-notification.show {
+    transform: translateX(-50%) translateY(0); /* Muncul ke tengah */
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    .content-box {
+        padding: 30px;
+        max-width: 90%;
+    }
+    .payment-option {
+        padding: 15px;
+        font-size: 1em;
+    }
+    .popup-content {
+        padding: 20px;
+    }
+    .popup-content img {
+        max-width: 200px;
+    }
+    .popup-content button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
 }
