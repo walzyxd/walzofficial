@@ -1,48 +1,60 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const qrisLink = document.querySelector('.qris-option');
-    const danaLink = document.querySelector('.dana-option');
+    const openQrisBtn = document.getElementById('open-qris');
+    const openDanaBtn = document.getElementById('open-dana');
     const qrisPopup = document.getElementById('qris-popup');
     const danaPopup = document.getElementById('dana-popup');
-    const copyDanaButton = document.getElementById('copy-dana');
+    const copyDanaBtn = document.getElementById('copy-dana');
     const copyNotification = document.getElementById('copy-notification');
-    const enlargeQrisButton = document.getElementById('enlarge-qris');
+    const enlargeQrisBtn = document.getElementById('enlarge-qris');
     const imageEnlargePopup = document.getElementById('image-enlarge-popup');
     const enlargedImg = document.getElementById('enlarged-img');
-    const qrisImage = document.getElementById('qris-image');
+    const qrisImage = document.querySelector('.qr-code-img');
 
-    qrisLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        qrisPopup.classList.add('active');
-    });
+    // Membuka pop-up QRIS
+    if (openQrisBtn) {
+        openQrisBtn.addEventListener('click', function() {
+            qrisPopup.classList.add('active');
+        });
+    }
 
-    danaLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        danaPopup.classList.add('active');
-    });
+    // Membuka pop-up DANA
+    if (openDanaBtn) {
+        openDanaBtn.addEventListener('click', function() {
+            danaPopup.classList.add('active');
+        });
+    }
 
+    // Fungsi untuk menutup pop-up
     window.closePopup = function(id) {
         const popup = document.getElementById(id);
-        popup.classList.remove('active');
+        if (popup) {
+            popup.classList.remove('active');
+        }
     };
 
-    if (copyDanaButton) {
-        copyDanaButton.addEventListener('click', function() {
+    // Fungsionalitas Copy DANA
+    if (copyDanaBtn) {
+        copyDanaBtn.addEventListener('click', function() {
             const phoneNumber = document.getElementById('dana-number').textContent;
             navigator.clipboard.writeText(phoneNumber).then(function() {
                 copyNotification.classList.add('show');
                 setTimeout(() => {
                     copyNotification.classList.remove('show');
                 }, 2000);
-            }, function(err) {
-                alert('Gagal menyalin nomor telepon: ', err);
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+                alert('Gagal menyalin nomor telepon.');
             });
         });
     }
 
-    if (enlargeQrisButton) {
-        enlargeQrisButton.addEventListener('click', function() {
-            enlargedImg.src = qrisImage.src;
-            imageEnlargePopup.classList.add('active');
+    // Fungsionalitas Perbesar QRIS
+    if (enlargeQrisBtn) {
+        enlargeQrisBtn.addEventListener('click', function() {
+            if (qrisImage && enlargedImg) {
+                enlargedImg.src = qrisImage.src;
+                imageEnlargePopup.classList.add('active');
+            }
         });
     }
 });
