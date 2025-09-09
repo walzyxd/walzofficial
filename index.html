@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WALZSHOP || Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <meta name="description" content="Temukan berbagai produk digital dengan harga pelajar.">
+    <meta name="keywords" content="walzshop, marketplace, jualan murah, gratis ongkir">
+    <meta property="og:title" content="WALZSHOP || Marketplace">
+    <meta property="og:description" content="Temukan berbagai produk digital dengan harga pelajar.">
+    <meta property="og:image" content="https://preview-market.vercel.app/img/favicon.png">
+    <meta property="og:url" content="https://preview-market.vercel.app">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="banner">
+                <img id="bannerImage" alt="Store Banner">
+                <div class="banner-content">
+                    <h2 id="storeTitle"></h2>
+                    <p id="greeting-text">Selamat berbelanja!</p>
+                </div>
+            </div>
+            
+            <div class="profile">
+                <div class="profile-img" id="profileImage">
+                    <img id="profilePic" alt="Profile">
+                    <div class="verified-badge" id="verifiedBadge">
+                        <i class="fas fa-check"></i>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h1 id="profileName"></h1>
+                    <p>⭐ 4.9 (1,234 Reviews) | Free Fee Admin</p>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <div class="stat-item">
+                    <div class="stat-value">12.5K</div>
+                    <div class="stat-label">Total Terjual</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">8.2K</div>
+                    <div class="stat-label">Pelanggan</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">98%</div>
+                    <div class="stat-label">Kepuasan</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="products-container" id="productsContainer">
+            </div>
+
+        <div class="faq-section">
+            <h2 class="section-title">Pertanyaan Umum</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Bagaimana cara melakukan pemesanan?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pilih produk yang ingin dibeli, lalu klik pada produk untuk melihat detail dan varian. Setelah memilih varian, klik tombol "Tambah ke Keranjang".</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Berapa lama waktu pengiriman?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Pengiriman dalam kota memakan waktu 1-2 hari, sedangkan luar kota 2-5 hari kerja tergantung daerah tujuan.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Apakah produk dijamin original?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Ya, semua produk yang kami jual 100% original dan bergaransi resmi. Kami memberikan garansi uang kembali jika produk terbukti tidak original.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Metode pembayaran apa saja yang diterima?
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Kami menerima transfer bank (BCA, Mandiri, BNI, BRI), e-wallet (Gopay, OVO, Dana, ShopeePay), serta QRIS.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="testimonials-container">
+            <h2 class="section-title">Testimonial Pelanggan</h2>
+            <div class="testimonials">
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <div class="testimonial-slide">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Ahmad R.">
+                            </div>
+                            <div class="testimonial-user">
+                                <div class="testimonial-user-name">Ahmad R.</div>
+                                <div class="testimonial-user-location">Bandung</div>
+                            </div>
+                            <div class="testimonial-rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"Pelayanan sangat cepat dan ramah. Produk original dan harga bersaing. Recommended banget!"</p>
+                            <div class="testimonial-date">12 Juni 2023</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Sinta W.">
+                            </div>
+                            <div class="testimonial-user">
+                                <div class="testimonial-user-name">Sinta W.</div>
+                                <div class="testimonial-user-location">Jakarta</div>
+                            </div>
+                            <div class="testimonial-rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"Barang sampai dengan cepat dan packing aman. Seller responsif dan helpful. Thanks WALZSHOP!"</p>
+                            <div class="testimonial-date">5 Juli 2023</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-slide">
+                        <div class="testimonial-header">
+                            <div class="testimonial-avatar">
+                                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Rizky M.">
+                            </div>
+                            <div class="testimonial-user">
+                                <div class="testimonial-user-name">Rizky M.</div>
+                                <div class="testimonial-user-location">Surabaya</div>
+                            </div>
+                            <div class="testimonial-rating">
+                                ⭐⭐⭐⭐⭐
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <p class="testimonial-text">"Sudah berkali-kali belanja di sini dan selalu puas. Produk berkualitas dan garansi terpercaya."</p>
+                            <div class="testimonial-date">28 Mei 2023</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <div class="testimonial-control prev" id="testimonialPrev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="testimonial-control next" id="testimonialNext">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="testimonial-dots">
+                    <div class="dot active" data-slide="0"></div>
+                    <div class="dot" data-slide="1"></div>
+                    <div class="dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="advantages">
+            <h2 class="section-title">Mengapa Memilih Kami?</h2>
+            <div class="advantage-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3 class="advantage-title">Pengiriman Cepat</h3>
+                    <p class="advantage-desc">Pesanan diproses maksimal 1x24 jam dan dikirim dengan kurir terpercaya</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="advantage-title">Garansi Resmi</h3>
+                    <p class="advantage-desc">Semua produk bergaransi resmi dengan dukungan aftersales terbaik</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="advantage-title">Dukungan 24/7</h3>
+                    <p class="advantage-desc">Customer service siap membantu Anda kapan saja selama 24 jam</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3 class="advantage-title">Terpercaya</h3>
+                    <p class="advantage-desc">Lebih dari 8.200 pelanggan telah mempercayakan kebutuhan mereka pada kami</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <p id="aboutText"></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontak Kami</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <span id="alamat"></span></p>
+                    <p><i class="fas fa-phone"></i> <span id="wa"></span></p>
+                    <p><i class="fas fa-envelope"></i> <span id="email"></span></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Link Cepat</h3>
+                    <a href="index.html">Beranda</a>
+                    <a href="#">Cari</a>
+                    <a href="keranjang.html">Keranjang</a>
+                    <a href="profil.html">Profil</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-icons">
+                        <a id="ytLink" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a id="tiktokLink" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a id="waLink" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a id="telegramLink" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p id="copyright"></p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="product-detail-header">
+                <div class="product-detail-icon" id="modalIcon"></div>
+                <div class="product-detail-title">
+                    <h3 class="product-detail-name" id="modalName"></h3>
+                    <div class="product-detail-price" id="modalPrice"></div>
+                </div>
+            </div>
+            <div class="product-detail-description" id="modalDescription"></div>
+            <div class="variant-selection" id="variantSelection">
+                </div>
+            <button class="add-to-cart-btn" id="addToCartBtn">Tambah ke Keranjang</button>
+        </div>
+    </div>
+
+    <div class="verification-modal" id="verificationModal">
+        <div class="verification-content">
+            <div class="verification-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="verification-title">Terverifikasi</h2>
+            <p class="verification-desc">WALZSHOP adalah toko terverifikasi dengan reputasi yang sangat baik. Semua produk dijamin original dan bergaransi resmi.</p>
+            <button class="close-verification" id="closeVerification">Mengerti</button>
+        </div>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="search.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>Cari</span>
+        </a>
+        <a href="keranjang.html" class="nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Keranjang</span>
+            <span class="cart-badge" id="cartBadge">0</span>
+        </a>
+        <a href="profil.html" class="nav-item">
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
+        </a>
+    </div>
+    
+    <script src="js/config.js"></script>
+    <script>
+        // Import config
+        document.getElementById("bannerImage").src = CONFIG.banner;
+        document.getElementById("storeTitle").innerText = CONFIG.nama + " || Marketplace";
+        document.getElementById("profilePic").src = CONFIG.profil;
+        document.getElementById("profileName").innerHTML = CONFIG.nama + ' <i class="fas fa-check-circle" style="color: var(--primary);"></i>';
+        document.getElementById("aboutText").innerText = CONFIG.tentang;
+        document.getElementById("alamat").innerText = CONFIG.alamat;
+        document.getElementById("wa").innerText = CONFIG.sosial_media.whatsapp;
+        document.getElementById("email").innerText = CONFIG.sosial_media.email;
+        document.getElementById("ytLink").href = "https://youtube.com/" + CONFIG.sosial_media.youtube;
+        document.getElementById("tiktokLink").href = "https://tiktok.com/@" + CONFIG.sosial_media.tiktok;
+        document.getElementById("waLink").href = "https://wa.me/" + CONFIG.sosial_media.whatsapp;
+        document.getElementById("telegramLink").href = "https://t.me/" + CONFIG.sosial_media.telegram;
+        document.getElementById("copyright").innerText =
+  `© ${new Date().getFullYear()} ${CONFIG.nama}. All Rights Reserved.`;
+        
+        // DOM Elements
+        const productsContainer = document.getElementById('productsContainer');
+        const productModal = document.getElementById('productModal');
+        const modalIcon = document.getElementById('modalIcon');
+        const modalName = document.getElementById('modalName');
+        const modalPrice = document.getElementById('modalPrice');
+        const modalDescription = document.getElementById('modalDescription');
+        const variantSelection = document.getElementById('variantSelection');
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const closeModal = document.getElementById('closeModal');
+        const themeToggle = document.getElementById('themeToggle');
+        const cartBadge = document.getElementById('cartBadge');
+        const verifiedBadge = document.getElementById('verifiedBadge');
+        const verificationModal = document.getElementById('verificationModal');
+        const closeVerification = document.getElementById('closeVerification');
+        const testimonialSlider = document.getElementById('testimonialSlider');
+        const testimonialPrev = document.getElementById('testimonialPrev');
+        const testimonialNext = document.getElementById('testimonialNext');
+        const dots = document.querySelectorAll('.dot');
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        // State Variables
+        let currentSlide = 0;
+        let selectedProduct = null;
+        let selectedVariant = null;
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Initialize the page
+        function init() {
+            updateCartBadge();
+            renderProducts();
+            setupEventListeners();
+            updateGreeting();
+        }
+
+        // Render products by category
+        function renderProducts() {
+            let productsHTML = '';
+            
+            for (const category in productsData) {
+                productsHTML += `
+                    <div class="product-category">
+                        <h2 class="category-title">${category}</h2>
+                        <div class="products-grid">
+                            ${productsData[category].map(product => `
+                                <div class="product-card" data-id="${product.id}">
+                                    <div class="product-icon">
+                                        <i class="${product.icon}"></i>
+                                    </div>
+                                    <h3 class="product-name">${product.name}</h3>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            productsContainer.innerHTML = productsHTML;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Product card click
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const productId = parseInt(card.getAttribute('data-id'));
+                    openProductModal(productId);
+                });
+            });
+
+            // Close modal
+            closeModal.addEventListener('click', closeProductModal);
+
+            // Theme toggle
+            themeToggle.addEventListener('click', toggleTheme);
+
+            // Add to cart
+            addToCartBtn.addEventListener('click', addToCart);
+
+            // Verification badge
+            verifiedBadge.addEventListener('click', () => {
+                verificationModal.style.display = 'block';
+            });
+
+            // Close verification modal
+            closeVerification.addEventListener('click', () => {
+                verificationModal.style.display = 'none';
+            });
+
+            // Testimonial controls
+            testimonialPrev.addEventListener('click', () => {
+                navigateTestimonial(-1);
+            });
+
+            testimonialNext.addEventListener('click', () => {
+                navigateTestimonial(1);
+            });
+
+            // Testimonial dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const slideIndex = parseInt(dot.getAttribute('data-slide'));
+                    goToTestimonial(slideIndex);
+                });
+            });
+
+            // FAQ toggles
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+        }
+
+        // Open product modal
+        function openProductModal(productId) {
+            // Find product by ID
+            for (const category in productsData) {
+                const product = productsData[category].find(p => p.id === productId);
+                if (product) {
+                    selectedProduct = product;
+                    break;
+                }
+            }
+
+            if (!selectedProduct) return;
+
+            // Update modal content
+            modalIcon.innerHTML = `<i class="${selectedProduct.icon}"></i>`;
+            modalName.textContent = selectedProduct.name;
+            modalPrice.textContent = `Rp ${selectedProduct.variants[0].price.toLocaleString('id-ID')}`;
+            modalDescription.textContent = selectedProduct.description;
+
+            // Render variants
+            variantSelection.innerHTML = `
+                <h4 class="variant-title">Pilih Varian:</h4>
+                <div class="variant-options">
+                    ${selectedProduct.variants.map((variant, index) => `
+                        <div class="variant-option ${index === 0 ? 'selected' : ''}" data-index="${index}">
+                            <div class="variant-name">${variant.name}</div>
+                            <div class="variant-price">Rp ${variant.price.toLocaleString('id-ID')}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            // Set first variant as selected
+            selectedVariant = 0;
+
+            // Add event listeners to variant options
+            document.querySelectorAll('.variant-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    document.querySelectorAll('.variant-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    option.classList.add('selected');
+                    
+                    // Update selected variant
+                    selectedVariant = parseInt(option.getAttribute('data-index'));
+                    
+                    // Update price
+                    modalPrice.textContent = `Rp ${selectedProduct.variants[selectedVariant].price.toLocaleString('id-ID')}`;
+                });
+            });
+
+            // Show modal
+            productModal.style.display = 'block';
+        }
+
+        // Close product modal
+        function closeProductModal() {
+            productModal.style.display = 'none';
+            selectedProduct = null;
+            selectedVariant = null;
+        }
+
+        // Add to cart
+        function addToCart() {
+            if (!selectedProduct) return;
+
+            const variant = selectedProduct.variants[selectedVariant];
+            
+            // Check if product already in cart
+            const existingItemIndex = cart.findIndex(item => 
+                item.productId === selectedProduct.id && item.variantName === variant.name
+            );
+
+            if (existingItemIndex >= 0) {
+                // Update quantity
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                // Add new item
+                cart.push({
+                    productId: selectedProduct.id,
+                    productName: selectedProduct.name,
+                    variantName: variant.name,
+                    price: variant.price,
+                    quantity: 1,
+                    icon: selectedProduct.icon
+                });
+            }
+
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart badge
+            updateCartBadge();
+            
+            // Show success message
+            showToast(`${selectedProduct.name} (${variant.name}) ditambahkan ke keranjang`);
+            
+            // Close modal
+            closeProductModal();
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartBadge.textContent = totalItems;
+        }
+
+        // Show toast notification
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = `
+                <i class="fas fa-check-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Remove toast after animation
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Toggle theme
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            themeToggle.innerHTML = newTheme === 'dark' ? 
+                '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        // Navigate testimonial
+        function navigateTestimonial(direction) {
+            const totalSlides = document.querySelectorAll('.testimonial-slide').length;
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            goToTestimonial(currentSlide);
+        }
+
+        // Go to specific testimonial
+        function goToTestimonial(slideIndex) {
+            const slideWidth = testimonialSlider.clientWidth;
+            testimonialSlider.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+            
+            // Update dots
+            dots.forEach(dot => {
+                const dotIndex = parseInt(dot.getAttribute('data-slide'));
+                dot.classList.toggle('active', dotIndex === slideIndex);
+            });
+            
+            currentSlide = slideIndex;
+        }
+
+        // Update greeting based on time of day
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting = '';
+            
+            if (hour < 12) greeting = 'Selamat pagi!';
+            else if (hour < 15) greeting = 'Selamat siang!';
+            else if (hour < 19) greeting = 'Selamat sore!';
+            else greeting = 'Selamat malam!';
+            
+            document.getElementById('greeting-text').textContent = greeting + ' Selamat berbelanja!';
+        }
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? 
+                '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
