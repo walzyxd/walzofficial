@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Pembayaran RIZX-STORE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-image"></div>
+    <div class="overlay"></div>
+    <div class="content">
+        <div class="content-box">
+            <h1>Welcome To Website Payment<br>RIZXZ</h1>
+            <a href="#" class="payment-option qris-option">QRIS</a>
+            <a href="#" class="payment-option dana-option">DANA</a>
+        </div>
+    </div>
+
+    <div id="qris-popup" class="popup">
+        <div class="popup-content">
+            <img src="qris.png" alt="QRIS Code">
+            <div class="popup-buttons">
+                <button class="close-button" onclick="closePopup('qris-popup')">Keluar</button>
+                <button class="enlarge-button">Perbesar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="dana-popup" class="popup">
+        <div class="popup-content">
+            <p id="dana-number">083139243389</p>
+            <button class="copy-button">Copy</button>
+            <p>ATAS NAMA : TI** SUT***</p>
+            <button class="close-button" onclick="closePopup('dana-popup')">Keluar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
