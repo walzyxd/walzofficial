@@ -1,16 +1,19 @@
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    color: #fff;
+    color: #fff; /* Teks putih seperti di gambar */
     overflow: hidden;
     position: relative;
-    background-color: #1a1a2e; 
+    background-color: #333; /* Fallback background gelap */
 }
 
 .background-image {
-    background-image: url('f21gcj.jpg');
+    background-image: url('f21gcj.jpg'); /* Gambar background kapal */
     background-size: cover;
     background-position: center;
     position: fixed;
@@ -19,9 +22,8 @@ body, html {
     width: 100%;
     height: 100%;
     z-index: -2;
-    filter: blur(8px); /* Blur yang sedikit lebih kuat */
-    transform: scale(1.08); /* Sedikit zoom untuk menghindari tepi buram */
-    transition: filter 0.5s ease;
+    filter: blur(5px) brightness(0.8); /* Blur dan sedikit lebih gelap */
+    transform: scale(1.05); /* Sedikit zoom untuk menghindari tepi buram */
 }
 
 .overlay {
@@ -30,7 +32,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Overlay lebih gelap */
+    background-color: rgba(0, 0, 0, 0.4); /* Overlay gelap yang transparan */
     z-index: -1;
 }
 
@@ -47,50 +49,52 @@ body, html {
 }
 
 .content-box {
-    background: rgba(255, 255, 255, 0.15); /* Transparansi sedikit lebih tinggi */
-    backdrop-filter: blur(15px); /* Efek glassmorphism lebih kuat */
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Border lebih jelas */
-    border-radius: 25px; /* Sudut lebih membulat */
+    /* Mirip gaya di gambar referensi */
+    background: rgba(255, 255, 255, 0.15); /* Transparansi ringan */
+    backdrop-filter: blur(10px); /* Efek blur pada konten box */
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border samar */
+    border-radius: 15px; /* Sudut membulat */
     padding: 40px;
-    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5); /* Bayangan lebih dalam */
-    max-width: 450px; /* Ukuran box sedikit lebih besar */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Bayangan */
+    max-width: 400px;
     width: 100%;
-    animation: fadeIn 1s ease-out; /* Animasi fade-in saat load */
+    animation: fadeIn 1s ease-out;
 }
 
 h1 {
-    font-size: 2.5em; /* Ukuran judul lebih besar */
-    margin-bottom: 35px;
+    font-size: 2.2em;
+    margin-bottom: 30px;
     font-weight: 700;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7); /* Bayangan teks lebih kuat */
-    letter-spacing: 1.5px; /* Spasi huruf */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Bayangan teks agar terbaca */
+    letter-spacing: 1px;
+    color: white; /* Warna teks putih */
 }
 
 .payment-option {
     display: block;
-    width: 100%;
-    padding: 18px; /* Padding lebih besar */
-    margin: 12px 0;
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.6); /* Border lebih terlihat */
-    border-radius: 15px; /* Sudut lebih membulat */
+    width: 100%; /* Sesuai lebar content-box */
+    padding: 15px;
+    margin: 10px 0;
+    background-color: rgba(255, 255, 255, 0.1); /* Background transparan */
+    border: 1px solid rgba(255, 255, 255, 0.4); /* Border samar */
+    border-radius: 50px; /* Sangat membulat seperti di gambar */
     text-decoration: none;
     color: white;
-    font-size: 1.2em; /* Ukuran teks lebih besar */
+    font-size: 1.1em;
     font-weight: 600;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    text-transform: uppercase; /* Huruf kapital */
-    letter-spacing: 1px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
 .payment-option:hover {
-    background-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-5px) scale(1.02); /* Efek hover lebih menonjol */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Popup Styles */
+/* Popup Styles (Mirip dengan gaya di gambar) */
 .popup {
     display: none;
     position: fixed;
@@ -98,7 +102,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.85); /* Overlay popup lebih gelap */
+    background-color: rgba(0, 0, 0, 0.85); /* Overlay gelap penuh */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -111,18 +115,20 @@ h1 {
 }
 
 .popup-content {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(25px); /* Blur popup lebih kuat */
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2); /* Latar belakang popup semi transparan */
+    backdrop-filter: blur(20px); /* Efek blur pada popup */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px; /* Sudut membulat */
     padding: 30px;
     text-align: center;
-    color: #fff;
-    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+    color: #fff; /* Teks putih di popup */
+    box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4);
     transform: scale(0.9);
     opacity: 0;
     transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    max-width: 350px; /* Ukuran popup lebih kecil seperti di gambar */
+    width: 90%;
 }
 
 .popup.active .popup-content {
@@ -131,17 +137,17 @@ h1 {
 }
 
 .popup-content img {
-    max-width: 280px; /* Ukuran gambar QRIS sedikit lebih besar di popup normal */
+    max-width: 220px; /* Ukuran gambar QRIS lebih kecil di popup normal */
     height: auto;
     margin-bottom: 25px;
-    border-radius: 12px;
+    border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .popup-content p {
-    font-size: 1.3em;
+    font-size: 1.1em; /* Ukuran teks lebih kecil */
     font-weight: 600;
-    margin: 15px 0;
+    margin: 10px 0;
     letter-spacing: 0.5px;
 }
 
@@ -150,78 +156,87 @@ h1 {
 }
 
 .popup-content button {
-    padding: 12px 25px; /* Padding tombol lebih besar */
-    margin: 10px;
+    padding: 10px 25px; /* Padding tombol */
+    margin: 8px;
     border: none;
-    border-radius: 30px; /* Bentuk tombol lebih oval */
+    border-radius: 50px; /* Sangat membulat */
     cursor: pointer;
     font-weight: 600;
     font-size: 1em;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    color: white; /* Teks tombol putih */
 }
 
 .popup-content button:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .copy-button {
-    background-color: #28a745; /* Hijau cerah */
-    color: white;
+    background-color: #007bff; /* Biru terang untuk copy */
 }
 
 .copy-button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
 
 .close-button {
-    background-color: #dc3545; /* Merah cerah */
-    color: white;
+    background-color: #6c757d; /* Abu-abu untuk keluar */
 }
 
 .close-button:hover {
-    background-color: #c82333;
+    background-color: #5a6268;
 }
 
 .enlarge-button {
-    background-color: #007bff; /* Biru cerah */
-    color: white;
+    background-color: #28a745; /* Hijau untuk perbesar */
 }
 
 .enlarge-button:hover {
-    background-color: #0056b3;
+    background-color: #218838;
 }
 
 /* Style untuk popup gambar yang diperbesar */
 .enlarge-content {
-    padding: 20px;
-    background: none; /* Hilangkan background glassmorphism untuk gambar */
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: rgba(0, 0, 0, 0.7); /* Latar belakang agak gelap agar gambar jelas */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: none;
-    box-shadow: none;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
     width: auto;
-    max-width: 90vw; /* Lebar maksimum 90% dari viewport */
-    max-height: 90vh; /* Tinggi maksimum 90% dari viewport */
+    max-width: 90vw;
+    max-height: 90vh;
+    padding: 15px; /* Padding lebih sedikit */
 }
 
 .enlarge-content img {
     max-width: 100%;
-    max-height: 80vh; /* Tinggi maksimum gambar di popup */
+    max-height: 80vh;
     width: auto;
     height: auto;
-    object-fit: contain; /* Memastikan gambar pas tanpa terpotong */
-    border-radius: 10px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 }
 
-/* Custom Copy Notification */
+.enlarge-content .close-button {
+    margin-top: 15px;
+    background-color: #dc3545; /* Merah untuk tombol tutup di popup perbesar */
+}
+
+.enlarge-content .close-button:hover {
+    background-color: #c82333;
+}
+
+
+/* Custom Copy Notification (tetap sama) */
 .copy-notification {
     position: fixed;
     bottom: 30px;
     left: 50%;
-    transform: translateX(-50%) translateY(100px); /* Awalnya di luar layar bawah */
+    transform: translateX(-50%) translateY(100px);
     background-color: #28a745;
     color: white;
     padding: 12px 25px;
@@ -235,7 +250,7 @@ h1 {
 }
 
 .copy-notification.show {
-    transform: translateX(-50%) translateY(0); /* Muncul ke tengah */
+    transform: translateX(-50%) translateY(0);
     opacity: 1;
     visibility: visible;
 }
@@ -249,24 +264,25 @@ h1 {
 /* Responsiveness */
 @media (max-width: 768px) {
     h1 {
-        font-size: 2em;
+        font-size: 1.8em;
     }
     .content-box {
         padding: 30px;
         max-width: 90%;
     }
     .payment-option {
-        padding: 15px;
-        font-size: 1em;
+        padding: 12px;
+        font-size: 0.9em;
     }
     .popup-content {
-        padding: 20px;
+        padding: 25px;
+        width: 85%;
     }
     .popup-content img {
-        max-width: 200px;
+        max-width: 180px;
     }
     .popup-content button {
-        padding: 10px 20px;
-        font-size: 0.9em;
+        padding: 8px 18px;
+        font-size: 0.8em;
     }
 }
