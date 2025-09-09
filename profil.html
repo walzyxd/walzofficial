@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - WALZSHOP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
+    <style>
+        /* Variabel CSS untuk Light dan Dark Mode */
+        :root {
+            --primary: #4a6cfa;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
+            --success: #00b894;
+            --warning: #fdcb6e;
+            --info: #0984e3;
+            
+            /* Light Mode Variables */
+            --bg-color: #f5f7ff;
+            --card-bg: #ffffff;
+            --text-color: #2d3436;
+            --text-secondary: #636e72;
+            --border-color: #dfe6e9;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            
+            --header-bg: linear-gradient(135deg, var(--primary), #6c5ce7);
+            --footer-bg: #2d3436;
+            --footer-text: #f8f9fa;
+            
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Mode Variables */
+        [data-theme="dark"] {
+            --bg-color: #1a1d21;
+            --card-bg: #2d3436;
+            --text-color: #f8f9fa;
+            --text-secondary: #b2bec3;
+            --border-color: #636e72;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            
+            --header-bg: linear-gradient(135deg, #2d3436, #1a1d21);
+            --footer-bg: #1a1d21;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+            padding-bottom: 70px; /* Space for bottom nav */
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .profile-header {
+            background: var(--header-bg);
+            color: white;
+            padding: 40px 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+            background-size: cover;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            border: 4px solid white;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: white;
+        }
+
+        .profile-tagline {
+            opacity: 0.9;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .profile-content {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .about-section, .contact-section, .message-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .about-section { animation-delay: 0.2s; }
+        .contact-section { animation-delay: 0.4s; }
+        .message-section { animation-delay: 0.6s; }
+
+        .about-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: rgba(74, 108, 250, 0.05);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        .contact-details h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+        }
+
+        .contact-details p {
+            font-weight: 600;
+        }
+
+        /* Message Form */
+        .form-group {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.7s; }
+        .form-group:nth-child(2) { animation-delay: 0.8s; }
+        .form-group:nth-child(3) { animation-delay: 0.9s; }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 108, 250, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 1s;
+        }
+
+        .submit-btn:hover {
+            background: #3a5be0;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn .btn-text {
+            transition: all 0.3s;
+        }
+
+        .submit-btn .btn-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        .submit-btn.sending .btn-text {
+            opacity: 0;
+        }
+
+        .submit-btn.sending .btn-loading {
+            opacity: 1;
+        }
+
+        .btn-loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Social Links */
+        .social-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s forwards;
+            animation-delay: 0.8s;
+        }
+
+        .social-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-color);
+            color: var(--primary);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* Success Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .notification-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--card-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 90;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .profile-name {
+                font-size: 1.5rem;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-icons {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-header {
+                padding: 30px 0;
+            }
+            
+            .profile-content {
+                padding: 30px 0;
+            }
+            
+            .about-section, .contact-section, .message-section, .social-section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="profile-header">
+        <div class="container">
+            <div class="profile-avatar">
+                <img id="profileImage" alt="Profile">
+            </div>
+            <h1 class="profile-name" id="profileName"></h1>
+            <p class="profile-tagline" id="profileTagline">Pemilik WALZSHOP Marketplace</p>
+        </div>
+    </header>
+
+    <main class="profile-content container">
+        <section class="about-section">
+            <h2 class="section-title">Tentang Saya</h2>
+            <p class="about-text" id="aboutText"></p>
+        </section>
+
+        <section class="contact-section">
+            <h2 class="section-title">Kontak Saya</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Alamat</h4>
+                        <p id="contactAddress"></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Telepon/WhatsApp</h4>
+                        <p id="contactPhone"></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Email</h4>
+                        <p id="contactEmail"></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4>Jam Operasional</h4>
+                        <p>09:00 - 21:00 WIB</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="social-section">
+            <h3 class="social-title">Ikuti Saya di Media Sosial</h3>
+            <div class="social-icons">
+                <a id="ytLink" class="social-icon" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a id="tiktokLink" class="social-icon" target="_blank">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a id="waLink" class="social-icon" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a id="telegramLink" class="social-icon" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </section>
+
+        <section class="message-section">
+            <h2 class="section-title">Kirim Pesan</h2>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <input type="text" id="name" class="form-input" placeholder="Masukkan nama lengkap" required>
+                </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="Masukkan alamat email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message" class="form-label">Pesan</label>
+                    <textarea id="message" class="form-textarea" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Kirim Pesan</span>
+                    <span class="btn-loading"><i class="fas fa-spinner"></i></span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <div class="notification" id="successNotification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="notification-content">
+            Pesan berhasil dikirim!
+        </div>
+    </div>
+
+    <div class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="index.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Beranda</span>
+        </a>
+        <a href="search.html" class="nav-item">
+            <i class="fas fa-search"></i>
+            <span>Cari</span>
+        </a>
+        <a href="keranjang.html" class="nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Keranjang</span>
+        </a>
+        <a href="profil.html" class="nav-item active">
+            <i class="fas fa-user"></i>
+            <span>Profil</span>
+        </a>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script>
+        // Import config
+        document.getElementById("profileImage").src = CONFIG.profil;
+        document.getElementById("profileName").innerText = CONFIG.nama;
+        document.getElementById("aboutText").innerText = CONFIG.tentang;
+        document.getElementById("contactAddress").innerText = CONFIG.alamat;
+        document.getElementById("contactPhone").innerText = CONFIG.sosial_media.whatsapp;
+        document.getElementById("contactEmail").innerText = CONFIG.sosial_media.email;
+        document.getElementById("ytLink").href = "https://youtube.com/" + CONFIG.sosial_media.youtube;
+        document.getElementById("tiktokLink").href = "https://tiktok.com/@" + CONFIG.sosial_media.tiktok;
+        document.getElementById("waLink").href = "https://wa.me/" + CONFIG.sosial_media.whatsapp;
+        document.getElementById("telegramLink").href = "https://t.me/" + CONFIG.sosial_media.telegram;
+
+        // DOM Elements
+        const themeToggle = document.getElementById('themeToggle');
+        const messageForm = document.getElementById('messageForm');
+        const submitBtn = document.querySelector('.submit-btn');
+        const successNotification = document.getElementById('successNotification');
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            themeToggle.innerHTML = savedTheme === 'dark' ? 
+                '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update icon
+            themeToggle.innerHTML = newTheme === 'dark' ? 
+                '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Form submission
+messageForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    // Get form data
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        message: document.getElementById('message').value,
+        timestamp: new Date().toLocaleString('id-ID')
+    };
+    
+    // Show loading state
+    submitBtn.classList.add('sending');
+    
+    try {
+        // Format pesan untuk dikirim ke Telegram
+        const telegramMessage = `
+鐙 *Pesan Baru dari Website*
+        
+側 *Nama:* ${formData.name}
+透 *Email:* ${formData.email}
+竢ｰ *Waktu:* ${formData.timestamp}
+        
+町 *Pesan:*
+${formData.message}
+        `.trim();
+        
+        // Kirim pesan ke Telegram menggunakan API Bot
+        const response = await fetch(`https://api.telegram.org/bot${CONFIG.telegram_api.bot}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: CONFIG.telegram_api.chatid,
+                text: telegramMessage,
+                parse_mode: 'Markdown'
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.ok) {
+            // Show success notification
+            successNotification.classList.add('show');
+            
+            // Reset form
+            messageForm.reset();
+            
+            // Hide notification after 3 seconds
+            setTimeout(() => {
+                successNotification.classList.remove('show');
+            }, 3000);
+        } else {
+            throw new Error(data.description || 'Gagal mengirim pesan');
+        }
+    } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.');
+    } finally {
+        // Remove loading state
+        submitBtn.classList.remove('sending');
+    }
+});
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.section-title, .about-section, .contact-section, .message-section, .social-section, .form-group, .submit-btn');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                
+                if (elementTop < window.innerHeight - 50 && elementBottom > 0) {
+                    element.style.animationPlayState = 'running';
+                }
+            });
+        };
+
+        // Initialize animations
+        window.addEventListener('load', () => {
+            animateOnScroll();
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
