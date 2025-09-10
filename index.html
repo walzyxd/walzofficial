@@ -3,60 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WALZSHOP Payment</title>
+    <title>WALZSHOP Payment ⚡</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="background-overlay"></div>
+    <div class="scanline-effect"></div>
 
-    <main class="main-content">
+    <main class="main-container">
         <div class="card">
             <h1 class="title">
-                Selamat datang di website payment <br>
-                <span class="highlight">WALZSHOP</span>
+                Selamat Datang di <br>
+                <span class="highlight">WALZSHOP Payment</span>
             </h1>
+            <p class="subtitle">Pilih metode pembayaran yang kamu inginkan.</p>
             <div class="buttons-container">
-                <button class="btn btn-primary" id="open-qris">QRIS</button>
-                <button class="btn btn-primary" id="open-dana">DANA</button>
+                <button class="btn btn-primary" id="open-qris">
+                    <span class="icon"></span> Bayar dengan QRIS
+                </button>
+                <button class="btn btn-primary" id="open-dana">
+                    <span class="icon"></span> Bayar dengan DANA
+                </button>
             </div>
         </div>
     </main>
 
     <div id="qris-popup" class="popup">
         <div class="popup-inner">
-            <div class="qr-placeholder" id="qr-placeholder"></div>
-            <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img" id="qr-code-img">
+            <h3 class="popup-title">Scan QRIS</h3>
+            <div class="qr-code-section">
+                <div class="qr-placeholder" id="qr-placeholder"></div>
+                <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img" id="qr-code-img">
+            </div>
             <div class="popup-actions">
-                <button class="btn btn-secondary close-button">Keluar</button>
-                <button class="btn btn-accent" id="enlarge-qris">Perbesar</button>
+                <button class="btn btn-secondary close-button">Tutup</button>
+                <button class="btn btn-accent" id="enlarge-qris">Perbesar QR</button>
             </div>
         </div>
     </div>
 
     <div id="dana-popup" class="popup">
         <div class="popup-inner">
-            <h3 class="popup-title">DANA</h3>
-            <p id="dana-number" class="phone-number">083139243389</p>
-            <p class="account-name">A/N : TI** SUT***</p>
+            <h3 class="popup-title">Pembayaran DANA</h3>
+            <div class="payment-info-box">
+                <p class="phone-number" id="dana-number">083139243389</p>
+                <p class="account-name">A/N: TI** SUT***</p>
+            </div>
             <div class="popup-actions">
-                <button class="btn btn-secondary close-button">Keluar</button>
+                <button class="btn btn-secondary close-button">Tutup</button>
                 <button class="btn btn-accent" id="copy-dana">Salin Nomor</button>
             </div>
         </div>
     </div>
 
-    <div id="copy-notification" class="notification">
-        Nomor Berhasil Disalin!
+    <div id="image-enlarge-popup" class="popup">
+        <div class="popup-inner">
+            <img src="" alt="Enlarged QRIS" id="enlarged-img" class="qr-code-img active">
+            <div class="popup-actions">
+                <button class="btn btn-secondary close-button">Tutup</button>
+            </div>
+        </div>
     </div>
 
-    <div id="image-enlarge-popup" class="popup">
-        <div class="popup-enlarge">
-            <img src="" alt="Enlarged QRIS" id="enlarged-img">
-            <button class="btn btn-secondary close-button">Tutup</button>
-        </div>
+    <div id="copy-notification" class="notification">
+        Nomor Berhasil Disalin! 🎉
     </div>
 
     <script src="script.js"></script>
