@@ -1,12 +1,13 @@
 :root {
-    --primary-color: #5B8C51;
-    --secondary-color: #B5C99A;
-    --accent-color: #82CD47;
-    --background-dark: #2C3E50;
-    --background-light: #F4F4F4;
-    --text-dark: #333;
-    --text-light: #fff;
-    --border-radius-base: 14px;
+    --primary-color: #00796B;
+    --secondary-color: #004D40;
+    --accent-color: #64FFDA;
+    --accent-color-glow: rgba(100, 255, 218, 0.6);
+    --background-dark: #1A202C;
+    --text-light: #EDF2F7;
+    --text-secondary: #A0AEC0;
+    --border-radius-base: 20px;
+    --spacing-base: 1rem;
 }
 
 /* --- Body & Background --- */
@@ -15,12 +16,12 @@ body, html {
     padding: 0;
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: var(--background-dark);
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--text-dark);
-    overflow-x: hidden;
+    color: var(--text-light);
+    overflow: hidden;
 }
 
 .background-overlay {
@@ -31,130 +32,122 @@ body, html {
     background-size: cover;
     background-position: center;
     z-index: -2;
-    filter: blur(10px) brightness(0.65);
-    transform: scale(1.15);
-    animation: bgMove 30s infinite alternate ease-in-out;
+    filter: blur(8px) brightness(0.5);
+    transform: scale(1.1);
+    animation: bgMove 40s infinite alternate ease-in-out;
 }
 
 @keyframes bgMove {
-    0% { transform: scale(1.1) translateX(0); }
-    100% { transform: scale(1.15) translateX(-25px); }
+    from { transform: scale(1.1) translate(0, 0); }
+    to { transform: scale(1.15) translate(-20px, 10px); }
 }
 
-/* --- Card --- */
+/* --- Main Card & Content --- */
 .main-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
+    padding: var(--spacing-base);
     z-index: 1;
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(26, 32, 44, 0.35);
     border-radius: var(--border-radius-base);
-    padding: 3rem 2rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(15px) saturate(160%);
-    -webkit-backdrop-filter: blur(15px) saturate(160%);
-    width: 100%;
-    max-width: 420px;
-    animation: fadeIn 0.8s ease-in-out;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    max-width: 480px;
+    animation: fadeIn 0.8s ease-in-out forwards;
 }
 
-/* --- Title --- */
 .title {
     font-size: 2rem;
     font-weight: 800;
+    line-height: 1.4;
     margin-bottom: 2rem;
-    color: var(--text-light);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
-    letter-spacing: 1px;
+}
+
+.title .highlight {
+    color: var(--accent-color);
+    text-shadow: 0 0 15px var(--accent-color-glow);
 }
 
 /* --- Buttons --- */
 .buttons-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .btn {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     border: none;
     border-radius: 50px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: all 0.35s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
     text-transform: uppercase;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.btn-qris, .btn-dana {
-    background: linear-gradient(135deg, var(--background-dark), #000);
-    color: var(--text-light);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-}
-
-.btn-qris::before, .btn-dana::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 200%; height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
-    transform: skewX(-20deg);
-    transition: all 0.6s;
-    z-index: -1;
-}
-
-.btn-qris:hover::before, .btn-dana:hover::before {
-    left: 100%;
-}
-
-.btn-qris:hover, .btn-dana:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    letter-spacing: 1.5px;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--text-light);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.btn-accent {
+    background: var(--accent-color);
+    color: var(--background-dark);
+    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.2);
+}
+
+.btn-accent:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(100, 255, 218, 0.4);
 }
 
 .btn-secondary {
-    background-color: #ccc;
-    color: var(--text-dark);
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-light);
 }
 
-/* --- Glow + Bounce untuk Copy --- */
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Glow + Bounce untuk Copy */
 .btn.glow-bounce {
     animation: glowBounce 0.6s ease forwards;
 }
 
 @keyframes glowBounce {
-    0% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    50% { transform: scale(1.1); box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color); }
-    100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px var(--accent-color-glow); }
+    100% { transform: scale(1); }
 }
 
-/* --- Popup --- */
+/* --- Popups --- */
 .popup {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    display: flex; justify-content: center; align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.3s, opacity 0.3s;
+    transition: visibility 0.3s, opacity 0.3s ease;
+    padding: 1rem;
 }
 
 .popup.active {
@@ -163,85 +156,141 @@ body, html {
 }
 
 .popup-inner {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.5);
     border-radius: var(--border-radius-base);
     padding: 2rem;
     text-align: center;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-    transform: translateY(20px);
-    transition: transform 0.35s ease, opacity 0.35s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transform: scale(0.95);
+    transition: transform 0.3s ease, opacity 0.3s ease;
     opacity: 0;
-    backdrop-filter: blur(12px) saturate(180%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    max-width: 380px;
 }
 
 .popup.active .popup-inner {
-    transform: translateY(0);
+    transform: scale(1);
     opacity: 1;
 }
 
-/* --- Shimmer QR --- */
+.popup-title {
+    font-size: 1.5rem;
+    margin-top: 0;
+    color: var(--accent-color);
+}
+
+.phone-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background-color: rgba(0,0,0,0.2);
+    padding: 0.8rem;
+    border-radius: 12px;
+    margin: 1rem 0;
+    letter-spacing: 2px;
+    user-select: all;
+}
+
+.account-name {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.popup-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+/* QR Code Styling */
 .qr-placeholder {
-    width: 220px;
-    height: 220px;
+    width: 250px; height: 250px;
     border-radius: var(--border-radius-base);
-    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
     background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
+    animation: shimmer 1.8s infinite;
     margin: 0 auto 1.5rem;
 }
 
 @keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
+    0% { background-position: -200% 0; } 100% { background-position: 200% 0; }
 }
 
-/* --- QR Glow + Scale --- */
 .qr-code-img {
-    max-width: 220px;
+    max-width: 250px;
     height: auto;
     border-radius: var(--border-radius-base);
     margin-bottom: 1.5rem;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    transform: scale(0);
+    display: none;
     opacity: 0;
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out, box-shadow 0.5s ease-out;
+    transform: scale(0.95);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .qr-code-img.active {
-    transform: scale(1);
+    display: block;
     opacity: 1;
-    box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
+    transform: scale(1);
 }
 
-/* --- Notifications --- */
+/* Popup untuk Perbesar Gambar */
+.popup-enlarge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+    opacity: 0;
+}
+
+.popup.active .popup-enlarge {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#enlarged-img {
+    max-width: 90vw;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: var(--border-radius-base);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+/* Notification */
 .notification {
     position: fixed;
-    bottom: 2rem; left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    color: var(--text-light);
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-color);
+    color: var(--background-dark);
     padding: 0.8rem 1.5rem;
     border-radius: 50px;
     font-weight: 600;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     z-index: 1001;
-    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
-    opacity: 0;
-    visibility: hidden;
+    transition: bottom 0.5s ease-in-out;
 }
 
 .notification.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-    visibility: visible;
+    bottom: 2rem;
 }
 
-/* --- Animasi --- */
-@keyframes fadeIn { from { opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+/* Animasi */
+@keyframes fadeIn { 
+    from { opacity:0; transform:translateY(20px); } 
+    to { opacity:1; transform:translateY(0); } 
+}
 
-/* --- Responsif --- */
+/* Responsif */
 @media (max-width: 600px) {
-    .card { padding: 2rem 1rem; }
+    .card { padding: 2rem 1.5rem; }
     .title { font-size: 1.6rem; }
     .btn { font-size: 0.9rem; }
+    .popup-inner { padding: 1.5rem; }
+    .phone-number { font-size: 1.3rem; }
 }
