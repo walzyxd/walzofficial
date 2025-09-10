@@ -10,11 +10,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Background -->
     <div class="background-overlay"></div>
 
+    <!-- Main Card -->
     <main class="main-content">
         <div class="card">
-            <h1 class="title">Selamat datang di website payment<br>WALZSHOP</h1>
+            <h1 class="title">
+                Selamat datang di website payment <br>
+                <span style="color: var(--accent-color)">WALZSHOP</span>
+            </h1>
             <div class="buttons-container">
                 <button class="btn btn-qris" id="open-qris">QRIS</button>
                 <button class="btn btn-dana" id="open-dana">DANA</button>
@@ -22,29 +27,38 @@
         </div>
     </main>
 
+    <!-- QRIS Popup -->
     <div id="qris-popup" class="popup">
         <div class="popup-inner">
-            <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img">
-            <div class="popup-actions">
+            <!-- Shimmer Placeholder -->
+            <div class="qr-placeholder" id="qr-placeholder"></div>
+            <!-- QR Code -->
+            <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img" id="qr-code-img">
+            <div class="popup-actions" style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
                 <button class="btn btn-secondary" onclick="closePopup('qris-popup')">Keluar</button>
                 <button class="btn btn-primary" id="enlarge-qris">Perbesar</button>
             </div>
         </div>
     </div>
 
+    <!-- DANA Popup -->
     <div id="dana-popup" class="popup">
         <div class="popup-inner">
             <p id="dana-number" class="phone-number">083139243389</p>
             <button class="btn btn-primary" id="copy-dana">Copy</button>
             <p class="account-name">A/N : TI** SUT***</p>
-            <button class="btn btn-secondary" onclick="closePopup('dana-popup')">Keluar</button>
+            <div class="popup-actions" style="margin-top:1rem;">
+                <button class="btn btn-secondary" onclick="closePopup('dana-popup')">Keluar</button>
+            </div>
         </div>
     </div>
 
+    <!-- Copy Notification -->
     <div id="copy-notification" class="notification">
         Nomor Berhasil Disalin!
     </div>
 
+    <!-- Image Enlarge Popup -->
     <div id="image-enlarge-popup" class="popup">
         <div class="popup-enlarge">
             <img src="" alt="Enlarged Image" id="enlarged-img">
@@ -52,6 +66,7 @@
         </div>
     </div>
 
+    <!-- Script -->
     <script src="script.js"></script>
 </body>
 </html>
