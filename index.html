@@ -3,73 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WALZSHOP Payment ⚡</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>RIZX STORE Payment</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-theme">
-    <div class="background-overlay"></div>
-
-    <main class="main-container">
-        <div class="card">
-            <h1 class="title">
-                Selamat Datang di <br>
-                <span class="highlight">WALZSHOP Payment</span>
-            </h1>
-            <p class="subtitle">Pilih metode pembayaran yang kamu inginkan.</p>
-            <div class="buttons-container">
-                <button class="btn btn-primary" id="open-qris">Bayar dengan QRIS</button>
-                <button class="btn btn-primary" id="open-dana">Bayar dengan DANA</button>
-            </div>
-            <div class="theme-toggle-container">
-                <label class="switch">
-                    <input type="checkbox" id="theme-toggle" checked>
-                    <span class="slider round"></span>
-                </label>
-                <span id="theme-text">Mode Gelap</span>
+<body>
+    <div class="overlay"></div>
+    <div class="main-content">
+        <div class="card" id="main-card">
+            <h1>Welcome To Website <br> Payment RIZXZ</h1>
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="openPopup('qris-popup')">QRIS</button>
+                <button class="btn btn-primary" onclick="openPopup('dana-popup')">DANA</button>
             </div>
         </div>
-    </main>
+    </div>
 
     <div id="qris-popup" class="popup">
-        <div class="popup-inner">
-            <h3 class="popup-title">Scan QRIS</h3>
-            <div class="qr-code-section">
-                <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img" id="qr-code-img">
-            </div>
+        <div class="popup-content">
+            <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code">
             <div class="popup-actions">
-                <button class="btn btn-secondary close-button">Tutup</button>
-                <button class="btn btn-accent" id="enlarge-qris">Perbesar QR</button>
+                <button class="btn" onclick="closePopup('qris-popup')">Keluar</button>
+                <button class="btn" onclick="enlargeQR()">Perbesar</button>
             </div>
         </div>
     </div>
 
     <div id="dana-popup" class="popup">
-        <div class="popup-inner">
-            <h3 class="popup-title">Pembayaran DANA</h3>
-            <div class="payment-info-box">
-                <p class="phone-number" id="dana-number">083139243389</p>
-                <p class="account-name">A/N: TI** SUT***</p>
-            </div>
+        <div class="popup-content">
+            <p class="phone-number">0895404969768</p>
+            <p>ATAS NAMA : SYAH</p>
             <div class="popup-actions">
-                <button class="btn btn-secondary close-button">Tutup</button>
-                <button class="btn btn-accent" id="copy-dana">Salin Nomor</button>
+                <button class="btn" onclick="copyNumber()">Copy</button>
+                <button class="btn" onclick="closePopup('dana-popup')">Keluar</button>
             </div>
         </div>
     </div>
 
-    <div id="image-enlarge-popup" class="popup">
-        <div class="popup-inner">
-            <img src="" alt="Enlarged QRIS" id="enlarged-img" class="qr-code-img active">
+    <div id="enlarge-popup" class="popup">
+        <div class="popup-content">
+            <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code Enlarge" class="qr-code qr-enlarge">
             <div class="popup-actions">
-                <button class="btn btn-secondary close-button">Tutup</button>
+                <button class="btn" onclick="closePopup('enlarge-popup')">Keluar</button>
             </div>
         </div>
     </div>
-
-    <div id="copy-notification" class="notification">Nomor Berhasil Disalin! 🎉</div>
 
     <script src="script.js"></script>
 </body>
