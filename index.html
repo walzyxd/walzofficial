@@ -11,8 +11,6 @@
 </head>
 <body class="dark-theme">
     <div class="background-overlay"></div>
-    <div id="particle-container"></div>
-    <div class="scanline-effect"></div>
 
     <main class="main-container">
         <div class="card">
@@ -22,12 +20,8 @@
             </h1>
             <p class="subtitle">Pilih metode pembayaran yang kamu inginkan.</p>
             <div class="buttons-container">
-                <button class="btn btn-primary" id="open-qris">
-                    <span class="icon"></span> Bayar dengan QRIS
-                </button>
-                <button class="btn btn-primary" id="open-dana">
-                    <span class="icon"></span> Bayar dengan DANA
-                </button>
+                <button class="btn btn-primary" id="open-qris">Bayar dengan QRIS</button>
+                <button class="btn btn-primary" id="open-dana">Bayar dengan DANA</button>
             </div>
             <div class="theme-toggle-container">
                 <label class="switch">
@@ -39,7 +33,6 @@
         </div>
     </main>
 
-    <!-- QRIS POPUP -->
     <div id="qris-popup" class="popup">
         <div class="popup-inner">
             <h3 class="popup-title">Scan QRIS</h3>
@@ -53,7 +46,6 @@
         </div>
     </div>
 
-    <!-- DANA POPUP -->
     <div id="dana-popup" class="popup">
         <div class="popup-inner">
             <h3 class="popup-title">Pembayaran DANA</h3>
@@ -68,7 +60,6 @@
         </div>
     </div>
 
-    <!-- ENLARGED IMAGE POPUP -->
     <div id="image-enlarge-popup" class="popup">
         <div class="popup-inner">
             <img src="" alt="Enlarged QRIS" id="enlarged-img" class="qr-code-img active">
@@ -78,10 +69,7 @@
         </div>
     </div>
 
-    <!-- NOTIFICATION -->
-    <div id="copy-notification" class="notification">
-        Nomor Berhasil Disalin! 🎉
-    </div>
+    <div id="copy-notification" class="notification">Nomor Berhasil Disalin! 🎉</div>
 
     <script src="script.js"></script>
 </body>
