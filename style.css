@@ -23,6 +23,7 @@
     --border-light: rgba(0, 0, 0, 0.1);
 }
 
+/* ----------------- BASE STYLES ----------------- */
 body, html {
     margin: 0;
     padding: 0;
@@ -47,6 +48,7 @@ body.light-theme {
     color: var(--text-dark);
 }
 
+/* ----------------- BACKGROUND ----------------- */
 .background-overlay {
     position: fixed;
     top: 0;
@@ -57,7 +59,7 @@ body.light-theme {
     z-index: -2;
     filter: blur(10px) brightness(0.3);
     transform: scale(1.1);
-    animation: bg-zoom 60s infinite alternate ease-in-out;
+    animation: bg-zoom-rotate 120s infinite linear;
     transition: filter 0.5s ease;
 }
 
@@ -65,6 +67,7 @@ body.light-theme .background-overlay {
     filter: blur(10px) brightness(0.8) contrast(1.2);
 }
 
+/* ----------------- SCANLINE EFFECT ----------------- */
 .scanline-effect {
     position: fixed;
     top: 0;
@@ -83,6 +86,7 @@ body.light-theme .scanline-effect {
     opacity: 0;
 }
 
+/* ----------------- MAIN CONTAINER ----------------- */
 .main-container {
     padding: var(--spacing-lg);
     z-index: 1;
@@ -91,6 +95,7 @@ body.light-theme .scanline-effect {
     max-width: 520px;
 }
 
+/* ----------------- CARD ----------------- */
 .card {
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-xl);
@@ -114,6 +119,7 @@ body.light-theme .card {
     border: 1px solid var(--border-light);
 }
 
+/* ----------------- TITLE ----------------- */
 .title {
     font-size: 2.8rem;
     font-weight: 700;
@@ -134,9 +140,20 @@ body.light-theme .title {
 
 .title .highlight {
     color: var(--text-accent);
-    text-shadow: 0 0 20px var(--accent-glow), 0 0 40px var(--accent-glow);
+    text-shadow: 0 0 5px var(--accent-glow),
+                 0 0 10px var(--accent-glow),
+                 0 0 20px var(--accent-glow),
+                 0 0 40px var(--accent-glow),
+                 0 0 80px var(--accent-glow);
+    animation: neon-flicker 2s infinite alternate;
 }
 
+@keyframes neon-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* ----------------- SUBTITLE ----------------- */
 .subtitle {
     font-size: 1.2rem;
     margin-bottom: var(--spacing-xl);
@@ -151,6 +168,7 @@ body.light-theme .subtitle {
     color: var(--text-dark);
 }
 
+/* ----------------- BUTTONS ----------------- */
 .buttons-container {
     display: flex;
     flex-direction: column;
@@ -179,7 +197,8 @@ body.light-theme .subtitle {
 
 .btn-primary:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px var(--primary-glow);
+    box-shadow: 0 8px 40px var(--primary-glow), 0 0 80px var(--primary-glow) inset;
+    animation: pulse 1.5s infinite;
 }
 
 .btn-accent {
@@ -190,7 +209,17 @@ body.light-theme .subtitle {
 
 .btn-accent:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 30px var(--accent-glow);
+    box-shadow: 0 8px 40px var(--accent-glow), 0 0 80px var(--accent-glow) inset;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 8px 40px var(--primary-glow), 0 0 80px var(--primary-glow) inset;
+    }
+    50% {
+        box-shadow: 0 12px 50px var(--primary-glow), 0 0 120px var(--primary-glow) inset;
+    }
 }
 
 .btn-secondary {
@@ -214,6 +243,7 @@ body.light-theme .btn-secondary {
     transform: translateY(-2px);
 }
 
+/* ----------------- POPUP ----------------- */
 .popup {
     position: fixed;
     top: 0;
@@ -262,188 +292,33 @@ body.light-theme .popup-inner {
 }
 
 .popup.active .popup-inner {
-    transform: scale(1);
+    transform: scale(1) rotateY(0deg);
     opacity: 1;
+    animation: popup-entrance 0.6s ease-out forwards;
 }
 
-.popup-title {
-    font-size: 2rem;
-    margin-top: 0;
-    color: var(--accent-color);
-    text-shadow: 0 0 15px var(--accent-glow);
+@keyframes popup-entrance {
+    0% { transform: scale(0.8) rotateY(-15deg); opacity: 0; }
+    100% { transform: scale(1) rotateY(0deg); opacity: 1; }
 }
 
-.payment-info-box {
-    border-radius: 15px;
-    padding: var(--spacing-sm) var(--spacing-md);
-    margin: var(--spacing-lg) 0;
-    transition: background-color 0.5s ease, border-color 0.5s ease;
+/* ----------------- BACKGROUND ANIMATION ----------------- */
+@keyframes bg-zoom-rotate {
+    0% { transform: scale(1.1) rotate(0deg); }
+    50% { transform: scale(1.15) rotate(1deg); }
+    100% { transform: scale(1.1) rotate(0deg); }
 }
 
-body.dark-theme .payment-info-box {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px dashed rgba(255, 255, 255, 0.1);
-}
-
-body.light-theme .payment-info-box {
-    background-color: rgba(0, 0, 0, 0.05);
-    border: 1px dashed rgba(0, 0, 0, 0.1);
-}
-
-.phone-number {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 3px;
-    user-select: all;
-    color: var(--primary-color);
-    text-shadow: 0 0 10px var(--primary-glow);
-}
-
-.account-name {
-    margin-top: 0.5rem;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    transition: color 0.5s ease;
-}
-
-body.dark-theme .account-name {
-    color: var(--text-light);
-}
-
-body.light-theme .account-name {
-    color: var(--text-dark);
-}
-
-.popup-actions {
-    display: flex;
-    gap: var(--spacing-sm);
-    justify-content: center;
-    margin-top: var(--spacing-xl);
-}
-
-.qr-code-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 0;
-}
-
-.qr-code-img {
-    max-width: 200px;
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    border: 3px solid var(--accent-color);
-    box-shadow: 0 0 30px var(--accent-glow);
-    margin: var(--spacing-md) 0;
-}
-
-#enlarged-img {
-    max-width: 300px;
-}
-
-.notification {
-    position: fixed;
-    bottom: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent-color);
-    color: var(--background-dark);
-    padding: 0.8rem 1.8rem;
-    border-radius: 50px;
-    font-weight: 600;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-    z-index: 1001;
-    transition: bottom 0.5s ease-in-out;
-    letter-spacing: 1px;
-}
-
-.notification.show {
-    bottom: var(--spacing-md);
-}
-
+/* ----------------- GENERAL ANIMATIONS ----------------- */
 @keyframes fade-in-up {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.theme-toggle-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 2rem;
-    font-size: 1rem;
-    user-select: none;
-}
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #333;
-    transition: .4s;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-}
-
-input:checked + .slider {
-    background-color: #2196F3;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
+/* ----------------- MEDIA ----------------- */
 @media (max-width: 600px) {
     .card { padding: var(--spacing-md); }
     .title { font-size: 2rem; }
     .btn { font-size: 1rem; padding: 1rem 1.5rem; }
     .popup-inner { padding: var(--spacing-md); max-width: 90%; }
-    .phone-number { font-size: 1.6rem; }
-    .qr-code-img { max-width: 150px; }
-    #enlarged-img { max-width: 250px; }
 }
