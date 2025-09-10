@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-theme">
     <div class="background-overlay"></div>
     <div class="scanline-effect"></div>
 
@@ -28,6 +28,13 @@
                     <span class="icon"></span> Bayar dengan DANA
                 </button>
             </div>
+            <div class="theme-toggle-container">
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle" checked>
+                    <span class="slider round"></span>
+                </label>
+                <span id="theme-text">Mode Gelap</span>
+            </div>
         </div>
     </main>
 
@@ -35,7 +42,6 @@
         <div class="popup-inner">
             <h3 class="popup-title">Scan QRIS</h3>
             <div class="qr-code-section">
-                <div class="qr-placeholder" id="qr-placeholder"></div>
                 <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img" id="qr-code-img">
             </div>
             <div class="popup-actions">
