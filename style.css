@@ -7,8 +7,8 @@
     --accent-glow: rgba(255, 235, 59, 0.5);
     --background-dark: #121212;
     --background-light: #f0f0f0;
-    --background-card-dark: rgba(18, 18, 18, 0.7);
-    --background-card-light: rgba(255, 255, 255, 0.7);
+    --background-card-dark: rgba(18, 18, 18, 0.5);
+    --background-card-light: rgba(255, 255, 255, 0.5);
     --text-dark: #333;
     --text-light: #e0e0e0;
     --text-accent: #ffeb3b;
@@ -216,8 +216,10 @@ body.light-theme .btn-secondary {
 
 .popup {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
