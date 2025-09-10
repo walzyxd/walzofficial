@@ -1,13 +1,15 @@
-/* --- Variabel Utama: Tema Neon Cyberpunk --- */
 :root {
-    --primary-color: #00bcd4; /* Sian */
-    --primary-glow: rgba(0, 188, 212, 0.7);
-    --secondary-color: #f44336; /* Merah */
-    --secondary-glow: rgba(244, 67, 54, 0.6);
-    --accent-color: #ffeb3b; /* Kuning */
+    --primary-color: #00bcd4;
+    --primary-glow: rgba(0, 188, 212, 0.6);
+    --secondary-color: #f44336;
+    --secondary-glow: rgba(244, 67, 54, 0.5);
+    --accent-color: #ffeb3b;
     --accent-glow: rgba(255, 235, 59, 0.5);
-    --background-dark: #121212; /* Abu-abu sangat gelap */
-    --background-card: rgba(18, 18, 18, 0.8);
+    --background-dark: #121212;
+    --background-light: #f0f0f0;
+    --background-card-dark: rgba(18, 18, 18, 0.7);
+    --background-card-light: rgba(255, 255, 255, 0.7);
+    --text-dark: #333;
     --text-light: #e0e0e0;
     --text-accent: #ffeb3b;
     --border-radius-lg: 25px;
@@ -15,24 +17,36 @@
     --spacing-lg: 2rem;
     --spacing-md: 1.5rem;
     --spacing-sm: 1rem;
+    --card-shadow-dark: rgba(0, 0, 0, 0.6);
+    --card-shadow-light: rgba(0, 0, 0, 0.2);
+    --border-dark: rgba(255, 255, 255, 0.08);
+    --border-light: rgba(0, 0, 0, 0.1);
 }
 
-/* --- Global & Tipografi --- */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Poppins', sans-serif; /* Font yang lebih futuristik */
-    background: var(--background-dark);
+    font-family: 'Poppins', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--text-light);
     overflow: hidden;
     position: relative;
+    text-align: center;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-/* --- Latar Belakang Dinamis --- */
+body.dark-theme {
+    background-color: var(--background-dark);
+    color: var(--text-light);
+}
+
+body.light-theme {
+    background-color: var(--background-light);
+    color: var(--text-dark);
+}
+
 .background-overlay {
     position: fixed;
     top: 0;
@@ -44,15 +58,11 @@ body, html {
     filter: blur(10px) brightness(0.3);
     transform: scale(1.1);
     animation: bg-zoom 60s infinite alternate ease-in-out;
+    transition: filter 0.5s ease;
 }
 
-@keyframes bg-zoom {
-    from {
-        transform: scale(1.1) rotate(0deg);
-    }
-    to {
-        transform: scale(1.2) rotate(2deg);
-    }
+body.light-theme .background-overlay {
+    filter: blur(10px) brightness(0.8) contrast(1.2);
 }
 
 .scanline-effect {
@@ -66,41 +76,42 @@ body, html {
     background-size: 100% 4px, 1px 100%;
     pointer-events: none;
     z-index: -1;
+    transition: opacity 0.5s ease;
 }
 
-/* --- Kartu Utama & Konten --- */
+body.light-theme .scanline-effect {
+    opacity: 0;
+}
+
 .main-container {
     padding: var(--spacing-lg);
     z-index: 1;
     perspective: 1000px;
+    width: 100%;
+    max-width: 520px;
 }
 
 .card {
-    background: var(--background-card);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-xl);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    text-align: center;
-    max-width: 520px;
-    animation: fade-in-up 0.8s ease-out forwards;
     transform-style: preserve-3d;
+    animation: fade-in-up 0.8s ease-out forwards;
+    margin: auto;
+    transition: background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
 }
 
-.card::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -1px;
-    border-radius: var(--border-radius-lg);
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    z-index: -1;
-    opacity: 0.2;
-    filter: blur(20px);
+body.dark-theme .card {
+    background: var(--background-card-dark);
+    box-shadow: 0 10px 40px var(--card-shadow-dark);
+    border: 1px solid var(--border-dark);
+}
+
+body.light-theme .card {
+    background: var(--background-card-light);
+    box-shadow: 0 10px 40px var(--card-shadow-light);
+    border: 1px solid var(--border-light);
 }
 
 .title {
@@ -108,8 +119,17 @@ body, html {
     font-weight: 700;
     line-height: 1.3;
     margin: 0 0 var(--spacing-lg);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     letter-spacing: 1px;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
+}
+
+body.dark-theme .title {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+body.light-theme .title {
+    color: var(--text-dark);
+    text-shadow: none;
 }
 
 .title .highlight {
@@ -118,12 +138,19 @@ body, html {
 }
 
 .subtitle {
-    color: var(--text-light);
     font-size: 1.2rem;
     margin-bottom: var(--spacing-xl);
+    transition: color 0.5s ease;
 }
 
-/* --- Tombol: Neon & Beranimasi --- */
+body.dark-theme .subtitle {
+    color: var(--text-light);
+}
+
+body.light-theme .subtitle {
+    color: var(--text-dark);
+}
+
 .buttons-container {
     display: flex;
     flex-direction: column;
@@ -137,7 +164,7 @@ body, html {
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
@@ -167,9 +194,19 @@ body, html {
 }
 
 .btn-secondary {
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+body.dark-theme .btn-secondary {
     background-color: rgba(255, 255, 255, 0.08);
     color: var(--text-light);
     border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+body.light-theme .btn-secondary {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: var(--text-dark);
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .btn-secondary:hover {
@@ -177,7 +214,6 @@ body, html {
     transform: translateY(-2px);
 }
 
-/* --- Gaya Popup: Glassmorphism & Neon --- */
 .popup {
     position: fixed;
     top: 0; left: 0;
@@ -199,19 +235,28 @@ body, html {
 }
 
 .popup-inner {
-    background: rgba(18, 18, 18, 0.7);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-xl);
     text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     transform: scale(0.9);
-    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.4s ease, background 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease;
     opacity: 0;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     width: 100%;
     max-width: 450px;
+}
+
+body.dark-theme .popup-inner {
+    background: rgba(18, 18, 18, 0.8);
+    box-shadow: 0 10px 40px var(--card-shadow-dark);
+    border: 1px solid var(--border-dark);
+}
+
+body.light-theme .popup-inner {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 40px var(--card-shadow-light);
+    border: 1px solid var(--border-light);
 }
 
 .popup.active .popup-inner {
@@ -227,11 +272,21 @@ body, html {
 }
 
 .payment-info-box {
-    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
     padding: var(--spacing-sm) var(--spacing-md);
     margin: var(--spacing-lg) 0;
     border: 1px dashed rgba(255, 255, 255, 0.1);
+    transition: background-color 0.5s ease, border-color 0.5s ease;
+}
+
+body.dark-theme .payment-info-box {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.light-theme .payment-info-box {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
 }
 
 .phone-number {
@@ -244,10 +299,18 @@ body, html {
 }
 
 .account-name {
-    color: var(--text-light);
     margin-top: 0.5rem;
     font-size: 1rem;
     letter-spacing: 1px;
+    transition: color 0.5s ease;
+}
+
+body.dark-theme .account-name {
+    color: var(--text-light);
+}
+
+body.light-theme .account-name {
+    color: var(--text-dark);
 }
 
 .popup-actions {
@@ -257,7 +320,6 @@ body, html {
     margin-top: var(--spacing-xl);
 }
 
-/* --- Bagian Kode QR --- */
 .qr-code-section {
     display: flex;
     flex-direction: column;
@@ -273,45 +335,8 @@ body, html {
     border: 3px solid var(--accent-color);
     box-shadow: 0 0 30px var(--accent-glow);
     margin: var(--spacing-md) 0;
-    display: none;
-    opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.qr-code-img.active {
-    display: block;
-    opacity: 1;
-    transform: scale(1);
-}
-
-.qr-placeholder {
-    width: 280px;
-    height: 280px;
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-    margin-bottom: var(--spacing-md);
-}
-
-.qr-placeholder::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-/* --- Notifikasi & Animasi --- */
 .notification {
     position: fixed;
     bottom: -100px;
@@ -335,15 +360,79 @@ body, html {
 @keyframes fade-in-up {
     from {
         opacity: 0;
-        transform: translateY(30px) rotateX(-5deg);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
-        transform: translateY(0) rotateX(0);
+        transform: translateY(0);
     }
 }
 
-/* --- Desain Responsif --- */
+.theme-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 2rem;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
 @media (max-width: 600px) {
     .card { padding: var(--spacing-md); }
     .title { font-size: 2rem; }
@@ -351,4 +440,3 @@ body, html {
     .popup-inner { padding: var(--spacing-md); max-width: 90%; }
     .phone-number { font-size: 1.6rem; }
 }
-
