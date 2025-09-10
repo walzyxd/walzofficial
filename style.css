@@ -1,13 +1,15 @@
 :root {
     --primary-color: #5B8C51;
     --secondary-color: #B5C99A;
+    --accent-color: #82CD47;
     --background-dark: #2C3E50;
     --background-light: #F4F4F4;
     --text-dark: #333;
     --text-light: #fff;
-    --border-radius-base: 12px;
+    --border-radius-base: 14px;
 }
 
+/* --- Body & Background --- */
 body, html {
     margin: 0;
     padding: 0;
@@ -18,22 +20,28 @@ body, html {
     justify-content: center;
     align-items: center;
     color: var(--text-dark);
+    overflow-x: hidden;
 }
 
 .background-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-image: url('https://files.catbox.moe/f21gcj.jpg');
     background-size: cover;
     background-position: center;
     z-index: -2;
-    filter: blur(8px) brightness(0.7);
-    transform: scale(1.1);
+    filter: blur(10px) brightness(0.65);
+    transform: scale(1.15);
+    animation: bgMove 30s infinite alternate ease-in-out;
 }
 
+@keyframes bgMove {
+    0% { transform: scale(1.1) translateX(0); }
+    100% { transform: scale(1.15) translateX(-25px); }
+}
+
+/* --- Card --- */
 .main-content {
     display: flex;
     flex-direction: column;
@@ -41,29 +49,33 @@ body, html {
     align-items: center;
     text-align: center;
     padding: 2rem;
-    position: relative;
     z-index: 1;
 }
 
 .card {
-    background-color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.12);
     border-radius: var(--border-radius-base);
     padding: 3rem 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px) saturate(160%);
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
     width: 100%;
-    max-width: 400px;
+    max-width: 420px;
     animation: fadeIn 0.8s ease-in-out;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* --- Title --- */
 .title {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 2rem;
+    font-weight: 800;
     margin-bottom: 2rem;
-    color: var(--text-dark);
+    color: var(--text-light);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    letter-spacing: 1px;
 }
 
+/* --- Buttons --- */
 .buttons-container {
     display: flex;
     flex-direction: column;
@@ -77,32 +89,68 @@ body, html {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
     text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .btn-qris, .btn-dana {
-    background-color: var(--background-dark);
+    background: linear-gradient(135deg, var(--background-dark), #000);
     color: var(--text-light);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.btn-qris::before, .btn-dana::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 200%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+    transform: skewX(-20deg);
+    transition: all 0.6s;
+    z-index: -1;
+}
+
+.btn-qris:hover::before, .btn-dana:hover::before {
+    left: 100%;
 }
 
 .btn-qris:hover, .btn-dana:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* --- Pop-up --- */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--text-light);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+    background-color: #ccc;
+    color: var(--text-dark);
+}
+
+/* --- Glow + Bounce untuk Copy --- */
+.btn.glow-bounce {
+    animation: glowBounce 0.6s ease forwards;
+}
+
+@keyframes glowBounce {
+    0% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    50% { transform: scale(1.1); box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color); }
+    100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+}
+
+/* --- Popup --- */
 .popup {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
     z-index: 1000;
     visibility: hidden;
     opacity: 0;
@@ -115,14 +163,15 @@ body, html {
 }
 
 .popup-inner {
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: var(--border-radius-base);
     padding: 2rem;
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
     transform: translateY(20px);
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.35s ease, opacity 0.35s ease;
     opacity: 0;
+    backdrop-filter: blur(12px) saturate(180%);
 }
 
 .popup.active .popup-inner {
@@ -130,49 +179,51 @@ body, html {
     opacity: 1;
 }
 
+/* --- Shimmer QR --- */
+.qr-placeholder {
+    width: 220px;
+    height: 220px;
+    border-radius: var(--border-radius-base);
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    margin: 0 auto 1.5rem;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* --- QR Glow + Scale --- */
 .qr-code-img {
-    max-width: 200px;
+    max-width: 220px;
     height: auto;
     border-radius: var(--border-radius-base);
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    transform: scale(0);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out, box-shadow 0.5s ease-out;
 }
 
-.phone-number {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--text-dark);
+.qr-code-img.active {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 20px var(--accent-color), 0 0 40px var(--accent-color);
 }
 
-.account-name {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 1.5rem;
-}
-
-.btn-primary {
-    background-color: var(--primary-color);
-    color: var(--text-light);
-}
-
-.btn-secondary {
-    background-color: #ccc;
-    color: var(--text-dark);
-}
-
-/* --- Notifikasi Salin --- */
+/* --- Notifications --- */
 .notification {
     position: fixed;
-    bottom: 2rem;
-    left: 50%;
+    bottom: 2rem; left: 50%;
     transform: translateX(-50%) translateY(100px);
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: var(--text-light);
     padding: 0.8rem 1.5rem;
     border-radius: 50px;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
     z-index: 1001;
     transition: transform 0.4s ease-out, opacity 0.4s ease-out;
     opacity: 0;
@@ -185,39 +236,12 @@ body, html {
     visibility: visible;
 }
 
-/* --- Pop-up Gambar Diperbesar --- */
-.popup-enlarge {
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 1rem;
-    border-radius: var(--border-radius-base);
-    text-align: center;
-    max-width: 90vw;
-    max-height: 90vh;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-.popup-enlarge img {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: var(--border-radius-base);
-    margin-bottom: 1rem;
-}
-
 /* --- Animasi --- */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+@keyframes fadeIn { from { opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
 
 /* --- Responsif --- */
 @media (max-width: 600px) {
-    .card {
-        padding: 2rem 1rem;
-    }
-    .title {
-        font-size: 1.5rem;
-    }
-    .btn {
-        font-size: 0.9rem;
-    }
+    .card { padding: 2rem 1rem; }
+    .title { font-size: 1.6rem; }
+    .btn { font-size: 0.9rem; }
 }
