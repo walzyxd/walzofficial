@@ -1,62 +1,189 @@
 :root {
-    --primary-color:#00bcd4;
-    --primary-glow:rgba(0,188,212,0.6);
-    --accent-color:#ffeb3b;
-    --accent-glow:rgba(255,235,59,0.5);
-    --background-dark:rgba(0,0,0,0);
-    --background-light:rgba(255,255,255,0);
-    --text-dark:#333;
-    --text-light:#e0e0e0;
-    --border-radius-lg:25px;
-    --spacing-xl:2.5rem;
-    --spacing-lg:2rem;
-    --spacing-md:1.5rem;
-    --spacing-sm:1rem;
+    --primary-color: #f0f0f0;
+    --secondary-color: #333;
+    --card-bg: rgba(255, 255, 255, 0.6);
+    --button-bg: #fff;
+    --button-text: #333;
+    --button-hover: rgba(255, 255, 255, 0.8);
+    --button-border: #999;
 }
 
-/* BODY & BACKGROUND */
-body, html{margin:0;padding:0;height:100%;font-family:'Poppins',sans-serif;display:flex;justify-content:center;align-items:center;text-align:center;transition:color 0.5s ease;}
-.background-overlay{
-    position:fixed;top:0;left:0;width:100%;height:100%;
-    background:url('https://files.catbox.moe/f21gcj.jpg') center/cover no-repeat;
-    filter:blur(8px) brightness(0.4);
-    z-index:-1;
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--primary-color);
+    position: relative;
+    overflow: hidden;
 }
 
-/* CARD */
-.card{
-    border-radius:var(--border-radius-lg);
-    padding:var(--spacing-xl);
-    background:rgba(255,255,255,0.05);
-    box-shadow:0 0 30px rgba(0,0,0,0.2);
-    border:1px solid rgba(255,255,255,0.1);
+body {
+    background-image: url('https://files.catbox.moe/f21gcj.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7);
+    transition: filter 0.5s ease-in-out;
 }
 
-/* TITLE & SUBTITLE */
-.title{font-size:2.5rem;font-weight:700;margin:0 0 var(--spacing-lg);}
-.title .highlight{color:var(--accent-color);text-shadow:0 0 20px var(--accent-glow);}
-.subtitle{font-size:1.2rem;margin-bottom:var(--spacing-lg);}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
 
-/* BUTTONS */
-.btn{padding:1rem 2rem;border-radius:50px;font-weight:600;cursor:pointer;transition:0.3s;backdrop-filter:blur(10px);}
-.btn-primary{background:rgba(0,188,212,0.2);color:#fff;}
-.btn-primary:hover{background:rgba(0,188,212,0.4);}
-.btn-accent{background:rgba(255,235,59,0.2);color:#000;}
-.btn-accent:hover{background:rgba(255,235,59,0.4);}
-.btn-secondary{background:rgba(255,255,255,0.1);color:#fff;}
-.btn-secondary:hover{background:rgba(255,255,255,0.2);}
+.main-content {
+    position: relative;
+    z-index: 2;
+}
 
-/* POPUP */
-.popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:0.3s;z-index:999;}
-.popup.active{opacity:1;visibility:visible;}
-.popup-inner{padding:var(--spacing-lg);border-radius:var(--border-radius-lg);backdrop-filter:blur(15px);background:rgba(255,255,255,0.05);}
-.popup-title{font-size:1.8rem;color:var(--accent-color);}
-.payment-info-box{padding:1rem;border:1px dashed rgba(255,255,255,0.2);margin:1rem 0;}
-.phone-number{font-size:1.8rem;font-weight:700;color:var(--primary-color);}
-.account-name{font-size:1rem;margin-top:0.5rem;}
-.popup-actions{display:flex;gap:1rem;justify-content:center;margin-top:1rem;}
-.qr-code-img{width:200px;border-radius:15px;border:2px solid var(--accent-color);}
+.card {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    width: 90%;
+    max-width: 400px;
+}
 
-/* NOTIFICATION */
-.notification{position:fixed;bottom:-100px;left:50%;transform:translateX(-50%);background:var(--accent-color);color:#000;padding:0.8rem 1.5rem;border-radius:50px;font-weight:600;transition:0.5s;}
-.notification.show{bottom:20px;}
+.card h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    text-shadow: 1px 1px 2px var(--secondary-color);
+}
+
+.card p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.button-group {
+    margin-top: 1.5rem;
+}
+
+.button-group .btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    text-shadow: none;
+}
+
+.button-group .btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.btn-primary:hover {
+    background-color: var(--button-hover);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+}
+
+.popup-content p {
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.popup-content .qr-code {
+    width: 80%;
+    max-width: 250px;
+    border-radius: 10px;
+    margin: 1rem auto;
+}
+
+.popup-content .qr-enlarge {
+    max-width: 300px;
+}
+
+.popup-content .phone-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 1rem;
+}
+
+.popup-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.popup-actions .btn {
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--button-border);
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+}
+
+.popup-actions .btn:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 1.5rem;
+    }
+    .card h1 {
+        font-size: 2rem;
+    }
+    .popup-content {
+        padding: 1.5rem 1rem;
+    }
+    .popup-content .phone-number {
+        font-size: 1.5rem;
+    }
+}
