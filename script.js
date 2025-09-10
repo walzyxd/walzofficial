@@ -14,35 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
     const themeText = document.getElementById('theme-text');
 
-    function openPopup(popupElement) {
-        popupElement.classList.add('active');
-    }
-
+    // --- POPUP ---
+    function openPopup(popup) { popup.classList.add('active'); }
     function closePopups() {
         qrisPopup.classList.remove('active');
         danaPopup.classList.remove('active');
         imageEnlargePopup.classList.remove('active');
     }
+    closeButtons.forEach(btn => btn.addEventListener('click', closePopups));
+    window.addEventListener('click', e => { if(e.target.classList.contains('popup')) closePopups(); });
+    window.addEventListener('keydown', e => { if(e.key==='Escape') closePopups(); });
 
-    function showNotification(message) {
-        notification.textContent = message;
-        notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 2000);
-    }
-
-    qrisBtn.addEventListener('click', () => {
-        openPopup(qrisPopup);
-    });
-
-    danaBtn.addEventListener('click', () => {
-        openPopup(danaPopup);
-    });
+    qrisBtn.addEventListener('click', () => openPopup(qrisPopup));
+    danaBtn.addEventListener('click', () => openPopup(danaPopup));
 
     enlargeQrisBtn.addEventListener('click', () => {
-        const qrImgSrc = qrCodeImg.src;
-        enlargedImg.src = qrImgSrc;
+        enlargedImg.src = qrCodeImg.src;
         openPopup(imageEnlargePopup);
     });
 
@@ -50,36 +37,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const danaNumber = document.getElementById('dana-number').textContent;
         navigator.clipboard.writeText(danaNumber).then(() => {
             showNotification('Nomor Berhasil Disalin!');
-        }).catch(err => {
-            console.error('Gagal menyalin: ', err);
-        });
+        }).catch(err => console.error('Gagal menyalin: ', err));
     });
 
-    closeButtons.forEach(button => {
-        button.addEventListener('click', closePopups);
-    });
+    function showNotification(msg) {
+        notification.textContent = msg;
+        notification.classList.add('show');
+        setTimeout(()=>notification.classList.remove('show'),2000);
+    }
 
-    window.addEventListener('click', (e) => {
-        if (e.target.classList.contains('popup')) {
-            closePopups();
-        }
-    });
-
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closePopups();
-        }
-    });
-
+    // --- THEME ---
     themeToggle.addEventListener('change', () => {
-        if (themeToggle.checked) {
-            body.classList.remove('light-theme');
-            body.classList.add('dark-theme');
-            themeText.textContent = "Mode Gelap";
+        if(themeToggle.checked){
+            body.classList.remove('light-theme'); body.classList.add('dark-theme'); themeText.textContent="Mode Gelap";
         } else {
-            body.classList.remove('dark-theme');
-            body.classList.add('light-theme');
-            themeText.textContent = "Mode Terang";
+            body.classList.remove('dark-theme'); body.classList.add('light-theme'); themeText.textContent="Mode Terang";
         }
     });
-});
+
+    // --- PARTICLES ---
+    const particleContainer = document.getElementById('particle-container');
+    const particleCount = 50;
+    for(let i=0;i<particleCount;i++){
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        p.style.left = Math.random()*100+'vw';
+        p.style.top = Math.random()*100+'vh';
+        p
