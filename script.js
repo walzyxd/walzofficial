@@ -1,80 +1,111 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const openQrisBtn = document.getElementById('open-qris');
-    const openDanaBtn = document.getElementById('open-dana');
-    const qrisPopup = document.getElementById('qris-popup');
-    const danaPopup = document.getElementById('dana-popup');
-    const copyDanaBtn = document.getElementById('copy-dana');
-    const copyNotification = document.getElementById('copy-notification');
-    const enlargeQrisBtn = document.getElementById('enlarge-qris');
-    const imageEnlargePopup = document.getElementById('image-enlarge-popup');
-    const enlargedImg = document.getElementById('enlarged-img');
-    const qrisImage = document.getElementById('qr-code-img');
-    const qrPlaceholder = document.getElementById('qr-placeholder');
 
-    // Buka QRIS dengan shimmer + scale + glow
-    if (openQrisBtn) {
-        openQrisBtn.addEventListener('click', () => {
-            qrisPopup.classList.add('active');
-            qrPlaceholder.style.display = 'block';
-            qrisImage.style.display = 'none';
-            qrisImage.classList.remove('active');
-
-            setTimeout(() => {
-                qrPlaceholder.style.display = 'none';
-                qrisImage.style.display = 'block';
-                setTimeout(() => {
-                    qrisImage.classList.add('active');
-                    setTimeout(() => {
-                        qrisImage.style.boxShadow = '0 6px 20px rgba(0,0,0,0.25)';
-                    }, 2000);
-                }, 50);
-            }, 1000);
-        });
-    }
-
-    // Buka DANA popup
-    if (openDanaBtn) {
-        openDanaBtn.addEventListener('click', () => danaPopup.classList.add('active'));
-    }
-
-    // Close popup
-    window.closePopup = id => {
-        const popup = document.getElementById(id);
-        if (popup) popup.classList.remove('active');
+    // --- 1. Seleksi Semua Elemen di Awal ---
+    const elements = {
+        popups: {
+            qris: document.getElementById('qris-popup'),
+            dana: document.getElementById('dana-popup'),
+            enlarge: document.getElementById('image-enlarge-popup'),
+        },
+        buttons: {
+            openQris: document.getElementById('open-qris'),
+            openDana: document.getElementById('open-dana'),
+            copyDana: document.getElementById('copy-dana'),
+            enlargeQris: document.getElementById('enlarge-qris'),
+            closeButtons: document.querySelectorAll('.close-button'),
+        },
+        qris: {
+            image: document.getElementById('qr-code-img'),
+            placeholder: document.getElementById('qr-placeholder'),
+            enlargedImage: document.getElementById('enlarged-img'),
+        },
+        dana: {
+            number: document.getElementById('dana-number'),
+        },
+        notification: document.getElementById('copy-notification'),
+        allPopups: document.querySelectorAll('.popup'),
     };
 
-    // Copy DANA + glow bounce
-    if (copyDanaBtn) {
-        copyDanaBtn.addEventListener('click', () => {
-            const phoneNumber = document.getElementById('dana-number').textContent.trim();
-            navigator.clipboard.writeText(phoneNumber).then(() => {
-                copyNotification.classList.add('show');
-                copyDanaBtn.classList.add('glow-bounce');
-                setTimeout(() => copyDanaBtn.classList.remove('glow-bounce'), 600);
-                setTimeout(() => copyNotification.classList.remove('show'), 2000);
-            }).catch(err => alert('Gagal menyalin nomor.'));
-        });
-    }
+    // --- 2. Fungsi Helper Terpusat ---
+    const showPopup = (popup) => popup.classList.add('active');
+    const hidePopup = (popup) => popup.classList.remove('active');
+    
+    const showNotification = () => {
+        elements.notification.classList.add('show');
+        setTimeout(() => {
+            elements.notification.classList.remove('show');
+        }, 2000);
+    };
+    
+    // --- 3. Logika Pemuatan QRIS yang Cerdas ---
+    const handleQrisLoading = () => {
+        const { image, placeholder } = elements.qris;
+        
+        placeholder.style.display = 'block';
+        image.style.display = 'none';
+        image.classList.remove('active');
 
-    // Perbesar QR
-    if (enlargeQrisBtn) {
-        enlargeQrisBtn.addEventListener('click', () => {
-            if (qrisImage && enlargedImg) {
-                enlargedImg.src = qrisImage.src;
-                imageEnlargePopup.classList.add('active');
-            }
-        });
-    }
+        image.onload = () => {
+            placeholder.style.display = 'none';
+            image.style.display = 'block';
+            setTimeout(() => image.classList.add('active'), 50); 
+        };
+        
+        if (image.complete) {
+            image.onload();
+        }
+    };
+    
+    // --- 4. Event Listeners (Penghubung Tombol & Fungsi) ---
 
-    // Tutup popup klik luar
-    document.querySelectorAll('.popup').forEach(popup => {
-        popup.addEventListener('click', e => { if (e.target === popup) popup.classList.remove('active'); });
+    elements.buttons.openQris.addEventListener('click', () => {
+        showPopup(elements.popups.qris);
+        handleQrisLoading();
     });
 
-    // Tutup popup tombol Esc
-    document.addEventListener('keydown', e => {
-        if (e.key === "Escape") {
-            document.querySelectorAll('.popup.active').forEach(popup => popup.classList.remove('active'));
+    elements.buttons.openDana.addEventListener('click', () => {
+        showPopup(elements.popups.dana);
+    });
+
+    elements.buttons.enlargeQris.addEventListener('click', () => {
+        elements.qris.enlargedImage.src = elements.qris.image.src;
+        showPopup(elements.popups.enlarge);
+    });
+
+    elements.buttons.copyDana.addEventListener('click', () => {
+        const phoneNumber = elements.dana.number.textContent.trim();
+        navigator.clipboard.writeText(phoneNumber).then(() => {
+            showNotification();
+            elements.buttons.copyDana.classList.add('glow-bounce');
+            setTimeout(() => elements.buttons.copyDana.classList.remove('glow-bounce'), 600);
+        }).catch(err => {
+            console.error('Gagal menyalin nomor:', err);
+            alert('Gagal menyalin nomor.');
+        });
+    });
+
+    // --- 5. Logika Menutup Semua Popup ---
+
+    elements.allPopups.forEach(popup => {
+        popup.addEventListener('click', (event) => {
+            if (event.target === popup) {
+                hidePopup(popup);
+            }
+        });
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === "Escape") {
+            elements.allPopups.forEach(popup => hidePopup(popup));
         }
+    });
+    
+    elements.buttons.closeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const parentPopup = button.closest('.popup');
+            if (parentPopup) {
+                hidePopup(parentPopup);
+            }
+        });
     });
 });
