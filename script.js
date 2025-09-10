@@ -1,111 +1,85 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const qrisBtn = document.getElementById('open-qris');
+    const danaBtn = document.getElementById('open-dana');
+    const qrisPopup = document.getElementById('qris-popup');
+    const danaPopup = document.getElementById('dana-popup');
+    const enlargeQrisBtn = document.getElementById('enlarge-qris');
+    const copyDanaBtn = document.getElementById('copy-dana');
+    const imageEnlargePopup = document.getElementById('image-enlarge-popup');
+    const closeButtons = document.querySelectorAll('.close-button');
+    const notification = document.getElementById('copy-notification');
+    const qrPlaceholder = document.getElementById('qr-placeholder');
+    const qrCodeImg = document.getElementById('qr-code-img');
+    const enlargedImg = document.getElementById('enlarged-img');
 
-    // --- 1. Seleksi Semua Elemen di Awal ---
-    const elements = {
-        popups: {
-            qris: document.getElementById('qris-popup'),
-            dana: document.getElementById('dana-popup'),
-            enlarge: document.getElementById('image-enlarge-popup'),
-        },
-        buttons: {
-            openQris: document.getElementById('open-qris'),
-            openDana: document.getElementById('open-dana'),
-            copyDana: document.getElementById('copy-dana'),
-            enlargeQris: document.getElementById('enlarge-qris'),
-            closeButtons: document.querySelectorAll('.close-button'),
-        },
-        qris: {
-            image: document.getElementById('qr-code-img'),
-            placeholder: document.getElementById('qr-placeholder'),
-            enlargedImage: document.getElementById('enlarged-img'),
-        },
-        dana: {
-            number: document.getElementById('dana-number'),
-        },
-        notification: document.getElementById('copy-notification'),
-        allPopups: document.querySelectorAll('.popup'),
-    };
+    // Fungsi untuk membuka popup
+    function openPopup(popupElement) {
+        popupElement.classList.add('active');
+    }
 
-    // --- 2. Fungsi Helper Terpusat ---
-    const showPopup = (popup) => popup.classList.add('active');
-    const hidePopup = (popup) => popup.classList.remove('active');
-    
-    const showNotification = () => {
-        elements.notification.classList.add('show');
+    // Fungsi untuk menutup semua popup
+    function closePopups() {
+        qrisPopup.classList.remove('active');
+        danaPopup.classList.remove('active');
+        imageEnlargePopup.classList.remove('active');
+    }
+
+    // Fungsi untuk menampilkan notifikasi
+    function showNotification(message) {
+        notification.textContent = message;
+        notification.classList.add('show');
         setTimeout(() => {
-            elements.notification.classList.remove('show');
+            notification.classList.remove('show');
         }, 2000);
-    };
-    
-    // --- 3. Logika Pemuatan QRIS yang Cerdas ---
-    const handleQrisLoading = () => {
-        const { image, placeholder } = elements.qris;
-        
-        placeholder.style.display = 'block';
-        image.style.display = 'none';
-        image.classList.remove('active');
+    }
 
-        image.onload = () => {
-            placeholder.style.display = 'none';
-            image.style.display = 'block';
-            setTimeout(() => image.classList.add('active'), 50); 
-        };
-        
-        if (image.complete) {
-            image.onload();
-        }
-    };
-    
-    // --- 4. Event Listeners (Penghubung Tombol & Fungsi) ---
-
-    elements.buttons.openQris.addEventListener('click', () => {
-        showPopup(elements.popups.qris);
-        handleQrisLoading();
+    // Event listeners untuk tombol utama
+    qrisBtn.addEventListener('click', () => {
+        openPopup(qrisPopup);
+        // Animasikan loading kode QR
+        setTimeout(() => {
+            qrPlaceholder.style.display = 'none';
+            qrCodeImg.classList.add('active');
+        }, 1000);
     });
 
-    elements.buttons.openDana.addEventListener('click', () => {
-        showPopup(elements.popups.dana);
+    danaBtn.addEventListener('click', () => {
+        openPopup(danaPopup);
     });
 
-    elements.buttons.enlargeQris.addEventListener('click', () => {
-        elements.qris.enlargedImage.src = elements.qris.image.src;
-        showPopup(elements.popups.enlarge);
+    // Event listener untuk memperbesar kode QR
+    enlargeQrisBtn.addEventListener('click', () => {
+        const qrImgSrc = qrCodeImg.src;
+        enlargedImg.src = qrImgSrc;
+        openPopup(imageEnlargePopup);
     });
 
-    elements.buttons.copyDana.addEventListener('click', () => {
-        const phoneNumber = elements.dana.number.textContent.trim();
-        navigator.clipboard.writeText(phoneNumber).then(() => {
-            showNotification();
-            elements.buttons.copyDana.classList.add('glow-bounce');
-            setTimeout(() => elements.buttons.copyDana.classList.remove('glow-bounce'), 600);
+    // Event listener untuk menyalin nomor DANA
+    copyDanaBtn.addEventListener('click', () => {
+        const danaNumber = document.getElementById('dana-number').textContent;
+        navigator.clipboard.writeText(danaNumber).then(() => {
+            showNotification('Nomor Berhasil Disalin!');
         }).catch(err => {
-            console.error('Gagal menyalin nomor:', err);
-            alert('Gagal menyalin nomor.');
+            console.error('Gagal menyalin: ', err);
         });
     });
 
-    // --- 5. Logika Menutup Semua Popup ---
-
-    elements.allPopups.forEach(popup => {
-        popup.addEventListener('click', (event) => {
-            if (event.target === popup) {
-                hidePopup(popup);
-            }
-        });
+    // Event listeners untuk menutup popup
+    closeButtons.forEach(button => {
+        button.addEventListener('click', closePopups);
     });
 
-    document.addEventListener('keydown', (event) => {
-        if (event.key === "Escape") {
-            elements.allPopups.forEach(popup => hidePopup(popup));
+    // Tutup popup saat mengklik di luar area
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('popup')) {
+            closePopups();
         }
     });
-    
-    elements.buttons.closeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const parentPopup = button.closest('.popup');
-            if (parentPopup) {
-                hidePopup(parentPopup);
-            }
-        });
+
+    // Tutup popup dengan tombol 'Escape'
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closePopups();
+        }
     });
 });
