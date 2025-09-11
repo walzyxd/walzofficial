@@ -3,56 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WALZSHOP Payment</title>
+    <title>WALZSHOP Payment Gateway</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <div class="background-video">
+        <video autoplay muted loop playsinline>
+            <source src="https://videos.pexels.com/video-files/8424888/8424888-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+    </div>
     <div class="background-overlay"></div>
+
+    <div class="aurora-container">
+        <div class="aurora-dot"></div>
+        <div class="aurora-dot"></div>
+        <div class="aurora-dot"></div>
+    </div>
+
     <main class="main-content">
         <div class="card">
-            <h1 class="title">
-                Selamat datang di website payment <br>
-                <span class="highlight">WALZSHOP</span>
-            </h1>
+            <div class="card-header">
+                <h1 class="title">
+                    Secure Payment Gateway
+                    <span class="highlight">WALZSHOP</span>
+                </h1>
+                <p class="subtitle">Pilih metode pembayaran yang Anda inginkan.</p>
+            </div>
             <div class="buttons-container">
-                <button class="btn btn-primary" id="open-qris">QRIS</button>
-                <button class="btn btn-primary" id="open-dana">DANA</button>
+                <button class="btn btn-primary" id="open-qris">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>QRIS</span>
+                </button>
+                <button class="btn btn-primary" id="open-dana">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>DANA</span>
+                </button>
             </div>
         </div>
     </main>
+
     <div id="qris-popup" class="popup">
         <div class="popup-inner">
-            <div class="qr-placeholder" id="qr-placeholder"></div>
-            <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img" id="qr-code-img">
+            <h3 class="popup-title">Pembayaran via QRIS</h3>
+            <div class="qr-container">
+                <div class="qr-placeholder" id="qr-placeholder"></div>
+                <img src="https://files.catbox.moe/pa0iwo.png" alt="QRIS Code" class="qr-code-img" id="qr-code-img">
+            </div>
             <div class="popup-actions">
                 <button class="btn btn-secondary close-button">Keluar</button>
-                <button class="btn btn-accent" id="enlarge-qris">Perbesar</button>
+                <button class="btn btn-accent" id="enlarge-qris">
+                    <i class="fa-solid fa-expand"></i> Perbesar
+                </button>
             </div>
         </div>
     </div>
+
     <div id="dana-popup" class="popup">
         <div class="popup-inner">
-            <h3 class="popup-title">DANA</h3>
-            <p id="dana-number" class="phone-number">083139243389</p>
-            <p class="account-name">A/N : TI** SUT***</p>
+            <h3 class="popup-title">Transfer via DANA</h3>
+            <div class="info-box">
+                <p id="dana-number" class="phone-number">083139243389</p>
+                <p class="account-name">A/N : TI** SUT***</p>
+            </div>
             <div class="popup-actions">
                 <button class="btn btn-secondary close-button">Keluar</button>
-                <button class="btn btn-accent" id="copy-dana">Salin Nomor</button>
+                <button class="btn btn-accent" id="copy-dana">
+                    <i class="fa-solid fa-copy"></i> Salin Nomor
+                </button>
             </div>
         </div>
     </div>
+
     <div id="copy-notification" class="notification">
-        Nomor Berhasil Disalin!
+        <i class="fa-solid fa-check-circle"></i> Nomor Berhasil Disalin!
     </div>
+
     <div id="image-enlarge-popup" class="popup">
         <div class="popup-enlarge">
             <img src="" alt="Enlarged QRIS" id="enlarged-img">
             <button class="btn btn-secondary close-button">Tutup</button>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
