@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const qrPlaceholder = document.getElementById('qr-placeholder');
     const qrImage = document.getElementById('qr-code-img');
     const enlargedImage = document.getElementById('enlarged-img');
+
     const closeButtons = document.querySelectorAll('.close-button');
     const allPopups = document.querySelectorAll('.popup');
 
@@ -28,17 +29,17 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => notification.classList.remove('show'), 3000);
     };
 
-    // --- Penanganan Event ---
-
-    // Buka popup QRIS
+    // --- Event: Buka popup QRIS ---
     openQrisBtn.addEventListener('click', () => {
         showPopup(qrisPopup);
+
         if (qrImage.complete) {
             qrPlaceholder.style.display = 'none';
             qrImage.classList.add('active');
         } else {
             qrPlaceholder.style.display = 'block';
             qrImage.classList.remove('active');
+
             qrImage.onload = () => {
                 qrPlaceholder.style.display = 'none';
                 qrImage.classList.add('active');
@@ -46,23 +47,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Buka popup DANA
+    // --- Event: Buka popup DANA ---
     openDanaBtn.addEventListener('click', () => showPopup(danaPopup));
 
-    // Salin nomor DANA
+    // --- Event: Salin nomor DANA ---
     copyDanaBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(danaNumber.innerText.trim())
             .then(showCopyNotification)
             .catch(err => console.error('Gagal menyalin:', err));
     });
 
-    // Perbesar gambar QRIS
+    // --- Event: Perbesar QRIS ---
     enlargeQrisBtn.addEventListener('click', () => {
         enlargedImage.src = qrImage.src;
         showPopup(imageEnlargePopup);
     });
 
-    // Tutup popup dengan tombol 'close'
+    // --- Event: Tutup popup dengan tombol close ---
     closeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const parentPopup = button.closest('.popup');
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Tutup popup dengan klik di luar area konten
+    // --- Event: Tutup popup dengan klik luar ---
     allPopups.forEach(popup => {
         popup.addEventListener('click', (event) => {
             if (event.target === popup) hidePopup(popup);
