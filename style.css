@@ -182,7 +182,7 @@ body, html {
     background-color: rgba(230, 237, 243, 0.2);
 }
 
-/* --- Popup, QRIS, DANA, Notifikasi --- (biarkan sama) */
+/* --- Popup, QRIS, DANA, Notifikasi --- */
 .popup { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; visibility: hidden; opacity: 0; transition: visibility 0.3s, opacity 0.3s ease; padding: 1rem; }
 .popup.active { visibility: visible; opacity: 1; }
 .popup-inner { background: rgba(30, 36, 44, 0.6); border-radius: var(--border-radius-lg); padding: 2.5rem; text-align: center; box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5); transform: scale(0.95); transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease; opacity: 0; backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(230, 237, 243, 0.15); width: 100%; max-width: 400px; box-sizing: border-box; }
