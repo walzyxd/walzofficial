@@ -1,115 +1,80 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const elements = {
-        popups: {
-            qris: document.getElementById('qris-popup'),
-            dana: document.getElementById('dana-popup'),
-            enlarge: document.getElementById('image-enlarge-popup'),
-        },
-        buttons: {
-            openQris: document.getElementById('open-qris'),
-            openDana: document.getElementById('open-dana'),
-            copyDana: document.getElementById('copy-dana'),
-            enlargeQris: document.getElementById('enlarge-qris'),
-            closeButtons: document.querySelectorAll('.close-button'),
-        },
-        qris: {
-            image: document.getElementById('qr-code-img'),
-            placeholder: document.getElementById('qr-placeholder'),
-            enlargedImage: document.getElementById('enlarged-img'),
-        },
-        dana: {
-            number: document.getElementById('dana-number'),
-        },
-        notification: document.getElementById('copy-notification'),
-        allPopups: document.querySelectorAll('.popup'),
+document.addEventListener('DOMContentLoaded', function () {
+
+    // --- Pemilihan Elemen ---
+    const openQrisBtn = document.getElementById('open-qris');
+    const openDanaBtn = document.getElementById('open-dana');
+    const copyDanaBtn = document.getElementById('copy-dana');
+    const enlargeQrisBtn = document.getElementById('enlarge-qris');
+
+    const qrisPopup = document.getElementById('qris-popup');
+    const danaPopup = document.getElementById('dana-popup');
+    const imageEnlargePopup = document.getElementById('image-enlarge-popup');
+
+    const danaNumber = document.getElementById('dana-number');
+    const notification = document.getElementById('copy-notification');
+
+    const qrPlaceholder = document.getElementById('qr-placeholder');
+    const qrImage = document.getElementById('qr-code-img');
+    const enlargedImage = document.getElementById('enlarged-img');
+    const closeButtons = document.querySelectorAll('.close-button');
+    const allPopups = document.querySelectorAll('.popup');
+
+    // --- Fungsi Bantuan ---
+    const showPopup = (popupEl) => popupEl.classList.add('active');
+    const hidePopup = (popupEl) => popupEl.classList.remove('active');
+
+    const showCopyNotification = () => {
+        notification.classList.add('show');
+        setTimeout(() => notification.classList.remove('show'), 3000);
     };
 
-    const showPopup = (popup) => popup.classList.add('active');
-    const hidePopup = (popup) => popup.classList.remove('active');
-    
-    const showNotification = () => {
-        elements.notification.classList.add('show');
-        setTimeout(() => {
-            elements.notification.classList.remove('show');
-        }, 2000);
-    };
-    
-    const handleQrisLoading = () => {
-        const { image, placeholder } = elements.qris;
-        
-        placeholder.style.display = 'block';
-        image.style.display = 'none';
-        image.classList.remove('active');
+    // --- Penanganan Event ---
 
-        image.onload = () => {
-            placeholder.style.display = 'none';
-            image.style.display = 'block';
-            setTimeout(() => image.classList.add('active'), 50); 
-        };
-        
-        if (image.complete) {
-            image.onload();
-        }
-    };
-
-    if (elements.buttons.openQris) {
-        elements.buttons.openQris.addEventListener('click', () => {
-            showPopup(elements.popups.qris);
-            handleQrisLoading();
-        });
-    }
-
-    if (elements.buttons.openDana) {
-        elements.buttons.openDana.addEventListener('click', () => {
-            showPopup(elements.popups.dana);
-        });
-    }
-
-    if (elements.buttons.enlargeQris) {
-        elements.buttons.enlargeQris.addEventListener('click', () => {
-            if (elements.qris.image && elements.qris.enlargedImage) {
-                elements.qris.enlargedImage.src = elements.qris.image.src;
-                showPopup(elements.popups.enlarge);
-            }
-        });
-    }
-
-    if (elements.buttons.copyDana) {
-        elements.buttons.copyDana.addEventListener('click', () => {
-            const phoneNumber = elements.dana.number.textContent.trim();
-            navigator.clipboard.writeText(phoneNumber).then(() => {
-                showNotification();
-                elements.buttons.copyDana.classList.add('glow-bounce');
-                setTimeout(() => {
-                    elements.buttons.copyDana.classList.remove('glow-bounce');
-                }, 600);
-            }).catch(err => {
-                console.error('Gagal menyalin nomor:', err);
-                alert('Gagal menyalin nomor.');
-            });
-        });
-    }
-
-    elements.allPopups.forEach(popup => {
-        popup.addEventListener('click', (event) => {
-            if (event.target === popup) {
-                hidePopup(popup);
-            }
-        });
-    });
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === "Escape") {
-            elements.allPopups.forEach(popup => hidePopup(popup));
+    // Buka popup QRIS
+    openQrisBtn.addEventListener('click', () => {
+        showPopup(qrisPopup);
+        if (qrImage.complete) {
+            qrPlaceholder.style.display = 'none';
+            qrImage.classList.add('active');
+        } else {
+            qrPlaceholder.style.display = 'block';
+            qrImage.classList.remove('active');
+            qrImage.onload = () => {
+                qrPlaceholder.style.display = 'none';
+                qrImage.classList.add('active');
+            };
         }
     });
-    
-    elements.buttons.closeButtons.forEach(button => {
+
+    // Buka popup DANA
+    openDanaBtn.addEventListener('click', () => showPopup(danaPopup));
+
+    // Salin nomor DANA
+    copyDanaBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(danaNumber.innerText.trim())
+            .then(showCopyNotification)
+            .catch(err => console.error('Gagal menyalin:', err));
+    });
+
+    // Perbesar gambar QRIS
+    enlargeQrisBtn.addEventListener('click', () => {
+        enlargedImage.src = qrImage.src;
+        showPopup(imageEnlargePopup);
+    });
+
+    // Tutup popup dengan tombol 'close'
+    closeButtons.forEach(button => {
         button.addEventListener('click', () => {
             const parentPopup = button.closest('.popup');
-            if (parentPopup) {
-                hidePopup(parentPopup);
-            }
+            if (parentPopup) hidePopup(parentPopup);
         });
     });
+
+    // Tutup popup dengan klik di luar area konten
+    allPopups.forEach(popup => {
+        popup.addEventListener('click', (event) => {
+            if (event.target === popup) hidePopup(popup);
+        });
+    });
+
 });
