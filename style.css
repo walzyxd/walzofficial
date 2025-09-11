@@ -1,49 +1,45 @@
-/* --- Variabel & Palet Warna --- */
+/* --- Variabel Warna --- */
 :root {
-    --primary-color: #4A90E2;
-    --secondary-color: #8A2BE2;
-    --accent-color: #50E3C2;
-    --accent-color-glow: rgba(80, 227, 194, 0.6);
+    --primary: #4A90E2;
+    --secondary: #8A2BE2;
+    --accent: #50E3C2;
+    --dark: #0D1117;
+    --light: #E6EDF3;
+    --muted: #7D8590;
 
-    --background-dark: #0D1117;
-    --text-light: #E6EDF3;
-    --text-secondary: #7D8590;
-
-    --border-radius-lg: 20px;
-    --border-radius-md: 12px;
-    --spacing-base: 1rem;
+    --glow-accent: rgba(80, 227, 194, 0.6);
+    --radius-lg: 20px;
+    --radius-md: 12px;
 }
 
-/* --- Pengaturan Dasar & Latar Belakang --- */
+/* --- Reset Dasar --- */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    background-color: var(--background-dark);
-    color: var(--text-light);
+    background: var(--dark);
+    color: var(--light);
     overflow: hidden;
 }
 
-/* Background gambar */
+/* --- Background Gambar --- */
 .background-image {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: url("https://img1.pixhost.to/images/8626/639439428_walzy.jpg") no-repeat center center/cover;
     z-index: -3;
+    filter: brightness(0.8);
 }
 
 .background-overlay {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle, rgba(13, 17, 23, 0.4) 0%, rgba(13, 17, 23, 0.8) 100%);
+    background: linear-gradient(to bottom right, rgba(13,17,23,0.6), rgba(13,17,23,0.9));
     z-index: -2;
 }
 
-/* --- Efek Aurora --- */
+/* --- Efek Aurora Glow --- */
 .aurora-container {
     position: fixed;
     inset: 0;
@@ -53,79 +49,82 @@ body, html {
 .aurora-dot {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.4;
+    filter: blur(120px);
+    opacity: 0.35;
+    mix-blend-mode: screen;
 }
 .aurora-dot:nth-child(1) {
     width: 400px; height: 400px;
-    top: -10%; left: 10%;
-    background-color: var(--primary-color);
-    animation: auroraMove 20s infinite alternate ease-in-out;
+    top: -15%; left: 15%;
+    background: var(--primary);
+    animation: float 18s infinite alternate ease-in-out;
 }
 .aurora-dot:nth-child(2) {
     width: 350px; height: 350px;
-    bottom: 5%; right: 0%;
-    background-color: var(--secondary-color);
-    animation: auroraMove 25s infinite alternate ease-in-out -5s;
+    bottom: 5%; right: 10%;
+    background: var(--secondary);
+    animation: float 22s infinite alternate ease-in-out -6s;
 }
 .aurora-dot:nth-child(3) {
     width: 300px; height: 300px;
-    top: 20%; right: 20%;
-    background-color: var(--accent-color);
-    animation: auroraMove 15s infinite alternate ease-in-out -10s;
+    top: 25%; right: 20%;
+    background: var(--accent);
+    animation: float 16s infinite alternate ease-in-out -3s;
 }
-@keyframes auroraMove {
+@keyframes float {
     from { transform: translate(0, 0) rotate(0deg); }
-    to { transform: translate(100px, 50px) rotate(180deg); }
+    to { transform: translate(120px, 60px) rotate(180deg); }
 }
 
-/* --- Tata Letak Utama --- */
+/* --- Konten Utama --- */
 .main-content {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: var(--spacing-base);
+    padding: 1rem;
     box-sizing: border-box;
 }
 
-/* --- Card Transparan --- */
+/* --- Card Glassmorphism --- */
 .card {
-    background: rgba(255, 255, 255, 0); /* Transparan total */
-    border-radius: var(--border-radius-lg);
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg);
     padding: clamp(2rem, 5vw, 2.5rem);
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.15);
     text-align: center;
     max-width: 480px;
     width: 100%;
-    animation: fadeIn 1s ease-out 0.5s forwards;
+    animation: fadeIn 1.2s ease-out 0.5s forwards;
     opacity: 0;
+    transform: translateY(30px);
+}
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .card-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
 }
-
 .title {
-    font-size: clamp(1.6rem, 4vw, 2rem);
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
     font-weight: 800;
-    line-height: 1.3;
     margin: 0;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    line-height: 1.3;
+    color: #fff;
+    text-shadow: 0 3px 12px rgba(0,0,0,0.6);
 }
-
 .title .highlight {
-    color: var(--accent-color);
-    text-shadow: 0 0 15px var(--accent-color-glow);
+    color: var(--accent);
+    text-shadow: 0 0 20px var(--glow-accent);
 }
-
 .subtitle {
     font-size: 1rem;
-    color: var(--text-secondary);
-    margin: 0.5rem 0 0;
+    color: var(--muted);
+    margin-top: 0.5rem;
 }
 
 /* --- Tombol --- */
@@ -135,13 +134,13 @@ body, html {
     gap: 1.25rem;
 }
 .btn {
-    padding: 0.9rem 1.5rem;
+    padding: 1rem 1.5rem;
     border: none;
-    border-radius: var(--border-radius-md);
+    border-radius: var(--radius-md);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -149,59 +148,134 @@ body, html {
     outline: none;
 }
 .btn i { transition: transform 0.3s ease; }
-.btn:hover i { transform: scale(1.2) rotate(-10deg); }
+.btn:hover i { transform: scale(1.25) rotate(-8deg); }
 
 .btn-primary {
-    background: rgba(56, 62, 70, 0.5);
-    color: var(--text-light);
-    border: 1px solid rgba(230, 237, 243, 0.1);
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.15));
+    color: var(--light);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 .btn-primary:hover {
-    background: rgba(56, 62, 70, 0.8);
-    border-color: rgba(230, 237, 243, 0.3);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: #fff;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
 }
 
 .btn-accent {
-    background: var(--accent-color);
-    color: var(--background-dark);
-    box-shadow: 0 4px 15px rgba(80, 227, 194, 0.2);
+    background: linear-gradient(135deg, var(--accent), #36d1dc);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(80,227,194,0.35);
 }
 .btn-accent:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px var(--accent-color-glow);
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 28px var(--glow-accent);
     filter: brightness(1.1);
 }
 
 .btn-secondary {
-    background-color: rgba(230, 237, 243, 0.1);
-    color: var(--text-light);
+    background: rgba(255,255,255,0.12);
+    color: var(--light);
 }
 .btn-secondary:hover {
-    background-color: rgba(230, 237, 243, 0.2);
+    background: rgba(255,255,255,0.25);
 }
 
-/* --- Popup, QRIS, DANA, Notifikasi --- */
-.popup { position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; visibility: hidden; opacity: 0; transition: visibility 0.3s, opacity 0.3s ease; padding: 1rem; }
-.popup.active { visibility: visible; opacity: 1; }
-.popup-inner { background: rgba(30, 36, 44, 0.6); border-radius: var(--border-radius-lg); padding: 2.5rem; text-align: center; box-shadow: 0 16px 50px rgba(0, 0, 0, 0.5); transform: scale(0.95); transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease; opacity: 0; backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(230, 237, 243, 0.15); width: 100%; max-width: 400px; box-sizing: border-box; }
-.popup.active .popup-inner { transform: scale(1); opacity: 1; }
-.popup-title { font-size: 1.5rem; margin-top: 0; margin-bottom: 2rem; color: var(--text-light); font-weight: 700; }
-.info-box { background-color: rgba(13, 17, 23, 0.5); padding: 1rem 1.5rem; border-radius: var(--border-radius-md); margin-bottom: 2rem; }
-.phone-number { font-size: 1.5rem; font-weight: 700; margin: 0; letter-spacing: 1.5px; color: var(--accent-color); }
-.account-name { color: var(--text-secondary); margin: 0.25rem 0 0; font-size: 0.9rem; }
-.popup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.qr-container { margin-bottom: 1.5rem; }
-.qr-placeholder { width: 100%; padding-bottom: 100%; border-radius: var(--border-radius-md); background: linear-gradient(110deg, rgba(255,255,255,0.05) 8%, rgba(255,255,255,0.1) 18%, rgba(255,255,255,0.05) 33%); background-size: 200% 100%; animation: shimmer 1.5s linear infinite; }
+/* --- Popup --- */
+.popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease, visibility 0.4s;
+}
+.popup.active {
+    visibility: visible;
+    opacity: 1;
+}
+.popup-inner {
+    background: rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    backdrop-filter: blur(25px) saturate(160%);
+    -webkit-backdrop-filter: blur(25px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.2);
+    width: 100%;
+    max-width: 400px;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275), opacity 0.35s ease;
+}
+.popup.active .popup-inner {
+    transform: scale(1);
+    opacity: 1;
+}
+.popup-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+/* --- QR Code --- */
+.qr-placeholder {
+    width: 100%;
+    padding-bottom: 100%;
+    border-radius: var(--radius-md);
+    background: linear-gradient(110deg, rgba(255,255,255,0.06) 8%, rgba(255,255,255,0.15) 18%, rgba(255,255,255,0.06) 33%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s linear infinite;
+}
 @keyframes shimmer { to { background-position-x: -200%; } }
-.qr-code-img { width: 100%; height: auto; border-radius: var(--border-radius-md); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); display: none; opacity: 0; transition: opacity 0.5s ease; }
-.qr-code-img.active { display: block; opacity: 1; }
-.popup-enlarge { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
-#enlarged-img { max-width: min(90vw, 500px); max-height: 80vh; border-radius: var(--border-radius-md); box-shadow: 0 0 60px rgba(0,0,0,0.6); }
-.notification { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--accent-color), #36d1dc); color: var(--background-dark); padding: 0.8rem 1.5rem; border-radius: 50px; font-weight: 600; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); z-index: 1001; transition: bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; align-items: center; gap: 0.5rem; }
+.qr-code-img {
+    width: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.qr-code-img.active {
+    display: block;
+    opacity: 1;
+}
+
+/* --- Popup Gambar Besar --- */
+#enlarged-img {
+    max-width: min(90vw, 500px);
+    max-height: 80vh;
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 60px rgba(0,0,0,0.7);
+}
+
+/* --- Notifikasi --- */
+.notification {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent), #36d1dc);
+    color: #000;
+    padding: 0.9rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    z-index: 1001;
+    transition: bottom 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
 .notification.show { bottom: 2rem; }
 
-/* --- Animasi --- */
-@keyframes fadeIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
-@media (max-width: 480px) { .card, .popup-inner { padding: 2rem 1.5rem; } .popup-actions { grid-template-columns: 1fr; } }
+/* --- Responsif --- */
+@media (max-width: 480px) {
+    .card, .popup-inner { padding: 2rem 1.5rem; }
+}
